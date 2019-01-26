@@ -69,7 +69,7 @@ hr.star-primary:after {
 }
 header {
   text-align: center;
-  background: img/universe.jpg;
+  background: url(img/universe.jpg);
   color: white;
 }
 header .container {
