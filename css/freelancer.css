@@ -188,7 +188,6 @@ section h2 {
 section.success {
   background-image: url(../img/universe.jpg);
   color: white;
-  text-align: center;
 }
 @media (max-width: 767px) {
   section {
