@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
  <meta charset="utf-8">
@@ -7,60 +6,65 @@
 
     <title>Anish Thite - Title</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Adlam:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../css/anish.css" rel="stylesheet">
-
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'adlam': ['Noto Sans Adlam', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
 </head>
 
-<body id="page-top" style="background-color:#EFEFEFEF; color:#222;">
+<body id="page-top" class="bg-stone-50 text-stone-900 font-sans">
 
-    <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-custom navbar-fixed-top navbar-custom" ">
-        <div class="container" style="color: #FFFFFF;">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    
+    <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <button type="button" class="md:hidden text-white" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="../index.html#page-top" style="color:#FFFFFF">Anish Thite</a>
+                <a class="text-stone-100 text-xl font-semibold font-adlam" href="../index.html#page-top">Anish Thite</a>
+                
+                <div class="hidden md:block" id="bs-example-navbar-collapse-1">
+                    <ul class="flex space-x-6">
+                        <li>
+                            <a href="../index.html#posts" class="text-stone-100 hover:text-stone-300 transition-colors">Posts</a>
+                        </li> 
+                        <li>
+                            <a href="../about.html#about" class="text-stone-100 hover:text-stone-300 transition-colors">About</a>
+                        </li> 
+                        <li>
+                            <a href="../about.html#portfolio" class="text-stone-100 hover:text-stone-300 transition-colors">CV</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="../index.html#page-top" style="color:#FFFFFF"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="../index.html#posts" style="color:#FFFFFF">Posts</a>
-                    </li> 
-                    <li class="page-scroll">
-                        <a href="../index.html#about" style="color:#FFFFFF">About</a>
-                    </li> 
-                    <li class="page-scroll">
-                        <a href="../index.html#portfolio" style="color:#FFFFFF">CV</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
 
-    <br><br><br>
-    <section id="main">
-        <div class="container">
-            <div class="col-lg-12 text-center">
-                <h1>Title - An Explanation</h1>
+    <div class="pt-12"></div>
+    <section id="main" class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-4">
+                <h1 class="text-4xl font-bold text-stone-900 font-adlam">Title - An Explanation</h1>
             </div>
-            <div id="include" style="text-indent: 50px; font-size: 16pt; margin-left : 11%; margin-right : 11%; line-height: 1.8; float: right;">
-            <br>
+            <div id="include" class="indent-12 text-base lg:text-lg mx-auto max-w-4xl leading-relaxed text-stone-800">
         
             </div>
         </div>
     </section>
 </body>
 
+</html>

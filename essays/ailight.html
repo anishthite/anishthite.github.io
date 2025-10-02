@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
  <meta charset="utf-8">
@@ -7,69 +6,70 @@
 
     <title>Anish Thite - AiLight: An Explanation</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Adlam:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../css/anish.css" rel="stylesheet">
-
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'adlam': ['Noto Sans Adlam', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
 </head>
 
-<body id="page-top" style="background-color:#EFEFEFEF; color:#222;">
+<body id="page-top" class="bg-stone-50 text-stone-900 font-sans">
 
-    <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-custom navbar-fixed-top navbar-custom" ">
-        <div class="container" style="color: #FFFFFF;">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    
+    <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <button type="button" class="md:hidden text-white" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="../index.html#page-top" style="color:#FFFFFF">Anish Thite</a>
+                <a class="text-stone-100 text-xl font-semibold font-adlam" href="../index.html#page-top">Anish Thite</a>
+                
+                <div class="hidden md:block" id="bs-example-navbar-collapse-1">
+                    <ul class="flex space-x-6">
+                        <li>
+                            <a href="../index.html#posts" class="text-stone-100 hover:text-stone-300 transition-colors">Posts</a>
+                        </li> 
+                        <li>
+                            <a href="../about.html#about" class="text-stone-100 hover:text-stone-300 transition-colors">About</a>
+                        </li> 
+                        <li>
+                            <a href="../about.html#portfolio" class="text-stone-100 hover:text-stone-300 transition-colors">CV</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="../index.html#page-top" style="color:#FFFFFF"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="../index.html#posts" style="color:#FFFFFF">Posts</a>
-                    </li> 
-                    <li class="page-scroll">
-                        <a href="../index.html#about" style="color:#FFFFFF">About</a>
-                    </li> 
-                    <li class="page-scroll">
-                        <a href="../index.html#portfolio" style="color:#FFFFFF">CV</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
 
-    <br><br><br>
-    <section id="main">
-        <div class="container">
-            <div class="col-lg-12 text-center">
-                <h1>AiLight - An Explanation</h1>
+    <div class="pt-12"></div>
+    <section id="main" class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-4">
+                <h1 class="text-4xl font-bold text-stone-900 font-adlam">AiLight - An Explanation</h1>
             </div>
-            <p>05/06/2020</p>
-            <div id="include" style="text-indent: 50px; font-size: 16pt; margin-left : 11%; margin-right : 11%; line-height: 1.8; float: right;">
-            <br>
-            <h3>Tl;dr: Most online summarizers cut out information. I've made AiLight, a web app that automatically highlights summaries within pdfs so that while important points are distinguished all information is still viewable.</h3> <br><br>
-<p>Reading assignments are common in secondary school and higher education. It's essentially a minimax problem, at least for topics that you hate. How do you maximize your teachers impression of your comprehension while minimizing the time spent reading it? People usually come to a conclusion that details are mainly frivolous, and the main ideas are what's important (i.e. tested through a discussion or a quiz). The game then turns into extracting the main ideas of the article with minimal effort. One of the most interesting cheat codes for this problem is the use of automatic summarization. People would run the article through a sumarizer, which would then return a shorter version of the article to read, cutting out anywhere from 70% to 90% of the information. While this may work great in theory, it comes at a price. If you only read the summary, you dont even glance at the details. Some of these details may be questioned on the test. SO the only way to solve this would be to read both the summary and the original text, which makes the summarizer pointless!</p>
-<br>
-<p>I personally faced this problem in my Psychology class, and created AiLight instead of reading the assigned papers. AiLight is an algorithm that highlights the important points within the paper, so that as I skimmed the highlightings I could also glance at the surrounding details. It's a one-read version of automatic summarization.</p>
-<br>
-<p>This solution ended up working better than I thought. The ability to have the summary highlighted allowed me to see each important point in context. It turned the summary from a distillation into a roadmap, providing signage for each major point. This especially helped for longer papers with few paragraph breaks. I tend to remember where text is on the page and use that to refer back to the paper. For these kinds of papers it is harder to distinguish where exactly the desired information is on the page, so learning positions in relations to highlightings makes it easier to dissect the paper.</p>
-<br>
-<p>I decided to make a website public at <a href='https://anishthite.github.io/ailight'> https://anishthite.github.io/ailight </a> where anyone can use the service to highlight PDFs. The algorithm is far from perfect. I'm currently working on it to provide the same benefit for more file types and languages, as well as improved efficency and highlighting accuracy. If you use the service, let me know what you think!</p>
-
+            <p class="text-sm mb-8 text-center text-stone-500">05/06/2020</p>
+            <div id="include" class="indent-12 text-base lg:text-lg mx-auto max-w-4xl leading-relaxed">
+            <h3 class="text-xl font-semibold mb-6 text-stone-800 font-adlam">Tl;dr: Most online summarizers cut out information. I've made AiLight, a web app that automatically highlights summaries within pdfs so that while important points are distinguished all information is still viewable.</h3>
+<p class="mb-6 text-stone-800">Reading assignments are common in secondary school and higher education. It's essentially a minimax problem, at least for topics that you hate. How do you maximize your teachers impression of your comprehension while minimizing the time spent reading it? People usually come to a conclusion that details are mainly frivolous, and the main ideas are what's important (i.e. tested through a discussion or a quiz). The game then turns into extracting the main ideas of the article with minimal effort. One of the most interesting cheat codes for this problem is the use of automatic summarization. People would run the article through a sumarizer, which would then return a shorter version of the article to read, cutting out anywhere from 70% to 90% of the information. While this may work great in theory, it comes at a price. If you only read the summary, you dont even glance at the details. Some of these details may be questioned on the test. SO the only way to solve this would be to read both the summary and the original text, which makes the summarizer pointless!</p>
+<p class="mb-6 text-stone-800">I personally faced this problem in my Psychology class, and created AiLight instead of reading the assigned papers. AiLight is an algorithm that highlights the important points within the paper, so that as I skimmed the highlightings I could also glance at the surrounding details. It's a one-read version of automatic summarization.</p>
+<p class="mb-6 text-stone-800">This solution ended up working better than I thought. The ability to have the summary highlighted allowed me to see each important point in context. It turned the summary from a distillation into a roadmap, providing signage for each major point. This especially helped for longer papers with few paragraph breaks. I tend to remember where text is on the page and use that to refer back to the paper. For these kinds of papers it is harder to distinguish where exactly the desired information is on the page, so learning positions in relations to highlightings makes it easier to dissect the paper.</p>
+<p class="mb-6 text-stone-800">I decided to make a website public at <a href='https://anishthite.github.io/ailight' class="text-stone-700 hover:text-stone-900 underline decoration-stone-400 hover:decoration-stone-600 transition-colors"> https://anishthite.github.io/ailight </a> where anyone can use the service to highlight PDFs. The algorithm is far from perfect. I'm currently working on it to provide the same benefit for more file types and languages, as well as improved efficency and highlighting accuracy. If you use the service, let me know what you think!</p>
             </div>
         </div>
     </section>
 </body>
 
+</html>
