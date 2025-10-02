@@ -1,17 +1,17 @@
+<!doctype html>
 <html lang="en">
 
 <head>
-   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Anish Thite - Home</title>
 
-    
+    <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Adlam:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script>
         tailwind.config = {
@@ -19,43 +19,40 @@
                 extend: {
                     fontFamily: {
                         'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'adlam': ['Noto Sans Adlam', 'system-ui', 'sans-serif'],
+                        'adlam': ['ADLaM Display', 'system-ui', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
  
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107351096-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)};
-  gtag('js', new Date());
-
-  gtag('config', 'UA-107351096-1');
-</script>
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107351096-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments)};
+        gtag('js', new Date());
+        gtag('config', 'UA-107351096-1');
+    </script>
 </head>
 
 <body id="page-top" class="bg-stone-50 text-stone-900 font-sans">
-
-    
+    <!-- Navigation -->
     <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
         <div class="container mx-auto px-4">
-            
             <div class="flex justify-between items-center py-4">
                 <button type="button" class="md:hidden text-white" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
                 <a class="text-stone-100 text-xl font-semibold font-adlam" href="#page-top">Anish Thite</a>
                 
-                
                 <div class="hidden md:block" id="bs-example-navbar-collapse-1">
                     <ul class="flex space-x-6">
                         <li>
-                            <a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors font-adlam">About</a>
+                            <a href="about.html" class="text-stone-100 hover:text-stone-300 hover:underline transition-colors font-adlam">About</a>
                         </li> 
                         <li>
-                            <a href="about.html#portfolio" class="text-stone-100 hover:text-stone-300 transition-colors font-adlam">CV</a>
+                            <a href="about.html#portfolio" class="text-stone-100 hover:text-stone-300 hover:underline transition-colors font-adlam">CV</a>
                         </li>
                     </ul>
                 </div>
@@ -63,18 +60,56 @@
         </div>
     </nav>
 
-    
+    <!-- Posts Section -->
     <header class="pt-20">
         <div id="posts" class="container mx-auto px-4">
             <div class="text-center py-12">
-                <h1 class="text-4xl font-bold mb-8 text-stone-900 font-adlam">Thoughts</h1>
-                <div class="text-xl leading-relaxed">
-                    <a href="./essays/ailight.html" class="text-stone-700 hover:text-stone-900 underline decoration-stone-400 hover:decoration-stone-600 transition-colors"> AiLight: An Explanation</a> 
-                    <span class="text-stone-500 ml-2">- 05/06/2020</span>
-                </div>
-                <div class="text-xl leading-relaxed">
-                    <a href="./essays/ailight.html" class="text-stone-700 hover:text-stone-900 underline decoration-stone-400 hover:decoration-stone-600 transition-colors"> AiLight: An Explanation</a> 
-                    <span class="text-stone-500 ml-2">- 05/06/2020</span>
+                <h1 class="text-4xl font-bold mb-8 text-stone-900 font-adlam">A Niche Thought</h1>
+                
+                <div class="max-w-2xl mx-auto">
+
+                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
+                        <a href="./essays/post.html?md=questions" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
+                            on Questions
+                        </a> 
+                        <span class="text-stone-500 ml-4">10/02/2025</span>
+                    </div>
+
+
+                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
+                        <a href="./essays/post.html?md=emo-runway" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
+                            on Emotional Runway
+                        </a> 
+                        <span class="text-stone-500 ml-4">10/01/2025</span>
+                    </div>
+
+                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
+                        <a href="./essays/post.html?md=soul" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
+                            on Soul
+                        </a> 
+                        <span class="text-stone-500 ml-4">09/20/2025</span>
+                    </div>
+
+                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
+                        <a href="./essays/post.html?md=startups" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
+                            on Founders
+                        </a> 
+                        <span class="text-stone-500 ml-4">09/08/2025</span>
+                    </div>
+                    
+
+                    <!-- <div class="text-xl leading-relaxed flex justify-between items-center py-2">
+                        <a href="./essays/pg.html" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
+                           on Paul Graham
+                        </a> 
+                        <span class="text-stone-500 ml-4">09/01/2025</span>
+                    </div> -->
+                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
+                        <a href="./essays/ailight.html" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
+                            on AiLight
+                        </a> 
+                        <span class="text-stone-500 ml-4">05/06/2020</span>
+                    </div>
                 </div>
             </div>
         </div>

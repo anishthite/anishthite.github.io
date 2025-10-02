@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Anish Thite - Post</title>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            adlam: ['"ADLaM Display"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet" />
+  <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Markdown renderer + sanitizer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+</head>
+
+<body id="page-top" class="bg-stone-50 text-stone-900 font-sans">
+  <!-- NAV -->
+  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <button type="button" class="md:hidden text-white" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="text-stone-100 text-xl font-semibold font-adlam" href="#page-top">Anish Thite</a>
+            
+            <div class="hidden md:block" id="bs-example-navbar-collapse-1">
+                <ul class="flex space-x-6">
+                    <li>
+                        <a href="about.html" class="text-stone-100 hover:text-stone-300 hover:underline transition-colors font-adlam">About</a>
+                    </li> 
+                    <li>
+                        <a href="about.html#portfolio" class="text-stone-100 hover:text-stone-300 hover:underline transition-colors font-adlam">CV</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+  <!-- Spacer to clear fixed nav -->
+  <div class="pt-16"></div>
+
+  <!-- MAIN -->
+  <section id="main" class="py-8">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-6">
+        <h1 id="page-title" class="text-4xl font-bold text-stone-900 font-adlam">Loading…</h1>
+        <p id="page-date" class="text-sm mt-2 text-stone-500"></p>
+      </div>
+
+      <div id="include" class="prose prose-stone mx-auto max-w-3xl leading-relaxed">
+        <div class="flex justify-center items-center py-8">
+          <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-stone-800"></div>
+          <p class="ml-3 text-stone-600">Loading content...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <noscript>
+    <div class="container mx-auto px-4 text-center">
+      <div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg inline-block">
+        <i class="fa fa-exclamation-triangle mr-2"></i>
+        This page requires JavaScript to render Markdown content.
+      </div>
+    </div>
+  </noscript>
+
+  <!-- Footer -->
+  <footer class="py-8 mt-12 bg-stone-100">
+    <div class="container mx-auto px-4 text-center text-stone-600 text-sm">
+      <p>&copy; 2023 Anish Thite. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- GH Pages–safe script: relative paths only, same-origin only -->
+  <script>
+    // Default markdown path RELATIVE to this HTML file
+    const DEFAULT_MD_RELATIVE = 'md/emo-runway.md';
+
+    // Only allow relative paths to avoid CORS issues
+    function getMdUrl() {
+      const params = new URL(location.href).searchParams;
+      const mdParam = params.get('md');
+      
+      let mdPath;
+      
+      if (mdParam) {
+        // If it contains a slash or dot, treat as a path
+        if (mdParam.includes('/') || mdParam.includes('.')) {
+          // Reject absolute URLs to prevent cross-origin fetch/CORS
+          if (/^https?:\/\//i.test(mdParam)) return null;
+          mdPath = mdParam;
+        } else {
+          // Otherwise treat as a keyword and construct path
+          mdPath = `md/${mdParam}.md`;
+        }
+      } else {
+        mdPath = DEFAULT_MD_RELATIVE;
+      }
+
+      // resolve relative to THIS PAGE so it works under /repo/
+      return new URL(mdPath, location.href);
+    }
+
+    function parseFrontmatter(md) {
+      const m = md.match(/^---\s*([\s\S]*?)\s*---\s*/);
+      if (!m) return { meta: {}, body: md };
+      const fm = m[1].split('\n').reduce((acc, line) => {
+        const mm = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)$/);
+        if (mm) acc[mm[1].trim()] = mm[2].trim().replace(/^['"]|['"]$/g,'');
+        return acc;
+      }, {});
+      return { meta: fm, body: md.slice(m[0].length) };
+    }
+
+    function setMeta(meta) {
+      const title = meta.title || 'Post';
+      document.getElementById('page-title').textContent = title;
+      document.title = `Anish Thite - ${title}`;
+      const dateEl = document.getElementById('page-date');
+      if (meta.date) {
+        const d = new Date(meta.date);
+        dateEl.textContent = isNaN(d) ? meta.date : d.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      } else {
+        dateEl.textContent = '';
+      }
+    }
+
+    function styleContent(container) {
+      // Paragraphs
+      container.querySelectorAll('p').forEach((p, i) => {
+        p.classList.add('mb-6','text-stone-800','font-sans');
+      });
+      // h1: Only h1 gets ADLaM, everything else Inter
+      container.querySelectorAll('h1').forEach(h => h.classList.add('text-4xl','font-bold','text-stone-900','font-adlam','mt-12','mb-6'));
+      container.querySelectorAll('h2').forEach(h => {
+        h.classList.add('text-2xl','font-semibold','mb-4','text-stone-800','font-sans','mt-10','pb-2','border-b','border-stone-200');
+        h.classList.remove('font-adlam');
+      });
+      container.querySelectorAll('h3').forEach(h => {
+        h.classList.add('text-xl','font-semibold','mb-4','text-stone-800','font-sans','mt-8');
+        h.classList.remove('font-adlam');
+      });
+      // Lists
+      container.querySelectorAll('ul').forEach(ul => ul.classList.add('list-disc','pl-8','mb-6','text-stone-800','space-y-2','font-sans'));
+      container.querySelectorAll('ol').forEach(ol => ol.classList.add('list-decimal','pl-8','mb-6','text-stone-800','space-y-2','font-sans'));
+      // Links
+      container.querySelectorAll('a').forEach(a => a.classList.add('text-stone-900','underline','underline-offset-2','decoration-stone-400','hover:text-stone-600','hover:decoration-stone-600','transition-colors','font-sans'));
+      // Code blocks
+      container.querySelectorAll('pre').forEach(pre => pre.classList.add('bg-stone-100','rounded-lg','p-4','overflow-x-auto','mb-6','shadow-sm','font-sans'));
+      container.querySelectorAll('code').forEach(code => code.classList.add('font-mono','text-sm'));
+      // Images
+      container.querySelectorAll('img').forEach(img => {
+        img.classList.add('my-8','rounded-lg','shadow-md','mx-auto','max-w-full');
+        // Wrap image in figure with caption if alt text exists
+        if (img.alt && !img.parentElement.matches('figure')) {
+          const figure = document.createElement('figure');
+          const figcaption = document.createElement('figcaption');
+          figcaption.textContent = img.alt;
+          figcaption.classList.add('text-center', 'text-sm', 'text-stone-500', 'mt-2', 'font-sans');
+          img.parentNode.insertBefore(figure, img);
+          figure.appendChild(img);
+          figure.appendChild(figcaption);
+        }
+      });
+      // Blockquotes
+      container.querySelectorAll('blockquote').forEach(bq => bq.classList.add('border-l-4','border-stone-300','pl-4','italic','text-stone-700','my-6','bg-stone-50','py-2','rounded-r','font-sans'));
+      // Tables
+      container.querySelectorAll('table').forEach(t => t.classList.add('table-auto','w-full','border-collapse','my-6','shadow-sm','font-sans'));
+      container.querySelectorAll('th, td').forEach(cell => cell.classList.add('border','border-stone-300','p-2','font-sans'));
+      container.querySelectorAll('th').forEach(th => th.classList.add('bg-stone-100','font-semibold'));
+    }
+
+    (async function boot() {
+      try {
+        const mdURL = getMdUrl();
+        if (!mdURL) throw new Error('External URLs are blocked. Use a keyword like ?md=soul or a relative path like ?md=md/custom.md');
+
+        // Same-origin relative fetch (works on GitHub Pages)
+        const res = await fetch(mdURL.href, { cache: 'no-store', credentials: 'same-origin' });
+        if (!res.ok) throw new Error(`Failed to load ${mdURL.pathname} (${res.status})`);
+        const raw = await res.text();
+
+        // Parse frontmatter and content
+        const { meta, body } = parseFrontmatter(raw);
+        setMeta(meta);
+
+        marked.setOptions({ gfm: true, breaks: true });
+        const unsafeHtml = marked.parse(body);
+        const safeHtml = DOMPurify.sanitize(unsafeHtml);
+
+        const container = document.getElementById('include');
+        container.innerHTML = safeHtml;
+        styleContent(container);
+      } catch (e) {
+        console.error(e);
+        document.getElementById('include').innerHTML =
+          '<div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg">' +
+          '<p class="font-medium">Error Loading Content</p>' +
+          '<p class="mt-2">Couldn\'t load the markdown file. Please check that:</p>' +
+          '<ul class="list-disc pl-5 mt-2 space-y-1">' +
+          '<li>The file exists in the correct location</li>' +
+          '<li>You\'re using a valid keyword (e.g., <code>?md=soul</code>) or relative path</li>' +
+          '<li>Your network connection is working</li>' +
+          '</ul></div>';
+      }
+    })();
+  </script>
+</body>
+</html>
