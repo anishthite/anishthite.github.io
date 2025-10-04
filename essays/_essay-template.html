@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Anish Thite - Post</title>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            adlam: ['"ADLaM Display"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts + (optional) Font Awesome (for the menu icon) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet" />
+  <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Markdown renderer + sanitizer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+</head>
+
+<body id="page-top" class="bg-stone-50 text-stone-900 font-sans">
+  <!-- NAV -->
+  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <button type="button" class="md:hidden text-white">
+          <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+        </button>
+        <a class="text-stone-100 text-xl font-semibold font-adlam" href="../index.html#page-top">Anish Thite</a>
+
+        <div class="hidden md:block">
+          <ul class="flex space-x-6">
+            <li><a href="../index.html#posts" class="text-stone-100 hover:text-stone-300 transition-colors">Posts</a></li>
+            <li><a href="../about.html#about" class="text-stone-100 hover:text-stone-300 transition-colors">About</a></li>
+            <li><a href="../about.html#portfolio" class="text-stone-100 hover:text-stone-300 transition-colors">CV</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Spacer so content clears the fixed nav -->
+  <div class="pt-12"></div>
+
+  <!-- MAIN -->
+  <section id="main" class="py-8">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-4">
+        <h1 id="page-title" class="text-4xl font-bold text-stone-900 font-adlam">Loading…</h1>
+      </div>
+      <p id="page-date" class="text-sm mb-8 text-center text-stone-500"></p>
+
+      <div id="include" class="indent-12 text-base lg:text-lg mx-auto max-w-4xl leading-relaxed">
+        <p class="mb-6 text-stone-800">Rendering content…</p>
+      </div>
+    </div>
+  </section>
+
+  <noscript>
+    <div class="container mx-auto px-4">
+      <p class="text-red-700">This page requires JavaScript to render Markdown.</p>
+    </div>
+  </noscript>
+
+  <!-- PAGE SCRIPT: fetches Markdown, parses optional frontmatter, renders + styles -->
+  <script>
+    // === CONFIG ===
+    // Use ?md=/path/to/file.md in the URL, or fallback to this default:
+    const DEFAULT_MD_PATH = './on-emotional-runway.md';
+
+    // === HELPERS ===
+    function parseFrontmatter(md) {
+      // very small frontmatter parser (YAML-like: key: value)
+      const fmMatch = md.match(/^---\s*([\s\S]*?)\s*---\s*/);
+      if (!fmMatch) return { meta: {}, body: md };
+
+      const raw = fmMatch[1];
+      const meta = {};
+      raw.split('\n').forEach(line => {
+        const m = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)$/);
+        if (m) {
+          const key = m[1].trim();
+          let val = m[2].trim();
+          // strip quotes if present
+          val = val.replace(/^['"]|['"]$/g, '');
+          meta[key] = val;
+        }
+      });
+
+      const body = md.slice(fmMatch[0].length);
+      return { meta, body };
+    }
+
+    function setMeta(meta) {
+      // Title
+      const title = meta.title || 'Post';
+      document.getElementById('page-title').textContent = title;
+      document.title = `Anish Thite - ${title}`;
+
+      // Date
+      const dateEl = document.getElementById('page-date');
+      if (meta.date) {
+        const d = new Date(meta.date);
+        dateEl.textContent = isNaN(d) ? meta.date : d.toLocaleDateString('en-US');
+      } else {
+        dateEl.textContent = '';
+      }
+    }
+
+    function applyTailwindTypography(container) {
+      // paragraphs
+      container.querySelectorAll('p').forEach((p, idx) => {
+        p.classList.add('mb-6', 'text-stone-800', 'indent-12');
+        if (idx === 0) p.classList.remove('indent-12'); // no indent for first paragraph
+      });
+
+      // headings
+      container.querySelectorAll('h1').forEach(h => h.classList.add('text-4xl','font-bold','text-stone-900','font-adlam','mt-8','mb-4','text-center'));
+      container.querySelectorAll('h2').forEach(h => h.classList.add('text-2xl','font-semibold','mb-4','text-stone-800','font-adlam','mt-8'));
+      container.querySelectorAll('h3').forEach(h => h.classList.add('text-xl','font-semibold','mb-4','text-stone-800','font-adlam','mt-8'));
+
+      // lists
+      container.querySelectorAll('ul').forEach(ul => ul.classList.add('list-disc','pl-8','mb-6','text-stone-800','space-y-3'));
+      container.querySelectorAll('ol').forEach(ol => ol.classList.add('list-decimal','pl-8','mb-6','text-stone-800','space-y-3'));
+
+      // links
+      container.querySelectorAll('a').forEach(a => a.classList.add('text-stone-900','underline','underline-offset-2','hover:text-stone-600'));
+      // code blocks
+      container.querySelectorAll('pre').forEach(pre => pre.classList.add('bg-stone-100','rounded-lg','p-4','overflow-x-auto','mb-6'));
+      container.querySelectorAll('code').forEach(code => code.classList.add('font-mono','text-sm'));
+      // images
+      container.querySelectorAll('img').forEach(img => img.classList.add('my-6','rounded-lg','shadow','mx-auto'));
+      // blockquotes
+      container.querySelectorAll('blockquote').forEach(bq => bq.classList.add('border-l-4','border-stone-300','pl-4','italic','text-stone-700','my-6'));
+      // tables
+      container.querySelectorAll('table').forEach(t => t.classList.add('table-auto','w-full','border-collapse','my-6'));
+      container.querySelectorAll('th, td').forEach(cell => cell.classList.add('border','border-stone-300','p-2'));
+      container.querySelectorAll('th').forEach(th => th.classList.add('bg-stone-100','font-semibold'));
+    }
+
+    // === MAIN ===
+    (async function renderMarkdownPage() {
+      try {
+        const url = new URL(window.location.href);
+        const mdPath = url.searchParams.get('md') || DEFAULT_MD_PATH;
+
+        const res = await fetch(mdPath, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Failed to load markdown: ${mdPath}`);
+        const raw = await res.text();
+
+        const { meta, body } = parseFrontmatter(raw);
+        setMeta(meta);
+
+        marked.setOptions({ gfm: true });
+        const unsafeHtml = marked.parse(body);
+        const safeHtml = DOMPurify.sanitize(unsafeHtml);
+
+        const container = document.getElementById('include');
+        container.innerHTML = safeHtml;
+
+        applyTailwindTypography(container);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('include').innerHTML =
+          '<p class="text-red-700">Error loading content. Check the <code>?md=</code> path or your network.</p>';
+      }
+    })();
+  </script>
+</body>
+</html>
