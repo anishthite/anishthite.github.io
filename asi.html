@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 20px;
+        }
+
+        .image-container {
+            max-width: 90vw;
+            max-height: 90vh;
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-container img {
+            display: block;
+            max-width: 100%;
+            max-height: calc(90vh - 24px);
+            height: auto;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="https://anishthite.github.io/cf7dfef9-cbc3-486c-ab26-d9b8da49b8ba.png" alt="Image">
+    </div>
+</body>
+</html>
