@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Reduced Theory of Fish Swimming</title>
+<style>
+  :root{--paper:#f7f7f4;--ink:#111;--muted:#595959;--rule:#d7d7d0;--soft:#efefea;--water:#dff2ee;--blue:#1687a7;--red:#d94f26;--gold:#b88700;--green:#277a4e;--violet:#6b55aa}
+  *{box-sizing:border-box;font-family:"Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif!important}
+  html,body{margin:0;background:var(--paper);color:var(--ink)}
+  body{font-size:18px;line-height:1.48}
+  main{max-width:1380px;margin:0 auto;padding:44px clamp(18px,4vw,62px) 72px}
+  h1{font-size:clamp(2.7rem,6vw,5.5rem);line-height:.96;letter-spacing:-.035em;margin:0 0 22px;font-weight:700;max-width:13ch}
+  h2{font-size:clamp(1.45rem,2.8vw,2.25rem);line-height:1.08;margin:0 0 12px;font-weight:700}
+  h3{font-size:1rem;margin:0 0 6px;font-style:italic;font-weight:400}
+  p{margin:0 0 12px}.abstract{max-width:880px;font-size:1.12rem}.abstract::first-letter{float:left;font-size:3.4em;line-height:.78;margin:.08em .12em 0 0}
+  a{color:var(--ink);text-decoration-thickness:1px;text-underline-offset:3px}button{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--rule);padding:5px 9px;cursor:pointer}button:hover{background:#fff}
+  header{border-bottom:1px solid var(--ink);padding-bottom:22px;margin-bottom:30px}.top{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px}.top a{border:0;padding:0}.top button{border-color:var(--ink)}
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 500px;gap:34px;align-items:start}.story{counter-reset:chapter;display:grid;gap:26px}.chapter{counter-increment:chapter;display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,250px);gap:24px;border-top:1px solid var(--rule);padding:22px 0 4px;position:relative}.chapter.no-branches{grid-template-columns:minmax(0,760px)}.chapter.no-branches .branch-column{display:none}.chapter.active{background:linear-gradient(90deg,rgba(255,255,255,.62),transparent)}.chapter-main{max-width:760px}.chapter-number{font-size:.96rem;color:var(--muted);margin-bottom:8px}.chapter-number::before{content:counter(chapter) ". "}.equation{display:block;border-left:2px solid var(--ink);background:rgba(255,255,255,.45);padding:12px 14px;margin:12px 0 10px;overflow-x:auto;font-size:1.02rem;line-height:1.55}.math{font-variant-numeric:lining-nums tabular-nums}.eqline{display:block;min-width:max-content;white-space:nowrap}.frac{display:inline-grid;grid-template-rows:auto auto;vertical-align:-.55em;text-align:center;margin:0 .12em}.frac>span:first-child{border-bottom:1px solid var(--ink);padding:0 .22em}.frac>span:last-child{padding:0 .22em}.term{font:inherit!important;font-style:italic!important;color:var(--ink);background:transparent!important;border:0!important;border-radius:0!important;padding:0 1px!important;cursor:help}.term:hover,.term:focus,.term.active{background:#fff6c9!important;outline:0}.term-tip{position:fixed;z-index:80;max-width:min(330px,calc(100vw - 24px));padding:8px 10px;border:1px solid var(--ink);background:var(--paper);box-shadow:0 8px 20px rgba(0,0,0,.12);font-size:.92rem;line-height:1.25;pointer-events:none}.term-card{margin-top:12px;border-top:1px solid var(--rule);padding-top:10px}.term-card strong{display:block}.term-card p{font-size:.92rem;color:var(--muted);margin:4px 0 0}.term-card a{font-size:.88rem}.term-close{float:right;border:0!important;background:transparent!important;padding:0 3px!important;font-size:1.1rem!important;line-height:1!important}.source{font-size:.92rem;color:var(--muted)}.cite{position:relative}.cite::after{content:attr(data-tip);position:absolute;left:50%;bottom:1.6em;transform:translateX(-50%);width:min(280px,70vw);padding:8px 10px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font-size:.88rem;line-height:1.25;box-shadow:0 6px 16px rgba(0,0,0,.08);opacity:0;pointer-events:none;transition:opacity .12s;z-index:20}.cite:hover::after,.cite:focus::after{opacity:1}.focus{margin-top:4px;font-size:.9rem}
+  .branch-column{position:relative;padding-left:0}.branch-card{border:1px solid var(--rule);background:rgba(255,255,255,.48);padding:12px;margin:0 0 12px;position:relative}.branch-card p{font-size:.95rem;color:var(--muted)}.branch-card.active{border-color:var(--ink);background:#fff}.branch-card button{font-size:.88rem}
+  .lab{position:sticky;top:18px;border:1px solid var(--ink);background:rgba(247,247,244,.97)}.lab-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--ink);padding:10px 12px}.lab-head strong{font-weight:700}.lab-head small{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}.canvas-wrap{position:relative}canvas{display:block;width:100%;height:285px;background:var(--water)}.controls{padding:12px}.control-title{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px}.sliders{display:grid;grid-template-columns:1fr 1fr;gap:9px 12px}.slider{display:grid;grid-template-columns:56px 1fr 50px;gap:7px;align-items:center}.slider label,.slider output{font-size:.82rem}.slider input{width:100%;accent-color:#111}.readouts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.readout span{display:block;color:var(--muted);font-size:.78rem}.readout b{display:block;font-size:1rem;font-weight:400}.branch-status{border-top:1px solid var(--rule);padding:12px}.branch-status[hidden],.term-card[hidden]{display:none}.branch-status p{font-size:.96rem;color:var(--muted)}.clear{font-size:.88rem}
+  .final,.glossary,.references{border-top:1px solid var(--ink);padding-top:22px;margin-top:34px}.final h2,.glossary h2,.references h2{margin-bottom:12px}.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.glossary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px 18px}.glossary-item{border-top:1px solid var(--rule);padding-top:8px}.glossary-item:target,.glossary-item.active{background:#fff6c9}.glossary-item strong{font-style:italic}.glossary-item p{font-size:.92rem;color:var(--muted);margin:3px 0 0}.references ol{margin:0;padding-left:1.4rem}.references li{margin:.35rem 0}.small{font-size:.92rem;color:var(--muted)}
+  @media(max-width:1050px){.layout,.final-grid{grid-template-columns:1fr}.lab{position:static}.chapter{grid-template-columns:1fr}.branch-column{padding-left:0}canvas{height:270px}.sliders{grid-template-columns:1fr}}
+  @media(max-width:700px){body{font-size:16px;line-height:1.45;overflow-x:hidden}main{padding:24px 12px 76px}header{margin-bottom:18px;padding-bottom:18px}h1{font-size:clamp(2.35rem,16vw,3.7rem);max-width:11ch}.abstract{font-size:1rem}.abstract::first-letter{font-size:2.7em}.top{gap:10px}.top a,.top button{min-height:38px}.layout{display:flex;flex-direction:column;gap:18px}.lab{order:-1;width:100%;margin-bottom:4px}.lab-head,.controls,.branch-status{padding:9px 10px}canvas{height:220px}.chapter{padding:18px 0 2px;gap:14px}.chapter-main{max-width:none}.branch-column{padding-left:0}.branch-card{padding:10px;margin-bottom:10px}.equation{font-size:.96rem;margin:10px -2px;padding:10px 12px}.readouts{grid-template-columns:1fr 1fr}.slider{grid-template-columns:70px 1fr 48px}.final,.glossary,.references{margin-top:26px}.term-tip{display:none}.term-card:not([hidden]){position:fixed;left:12px;right:12px;bottom:12px;z-index:90;border:1px solid var(--ink);background:var(--paper);box-shadow:0 8px 24px rgba(0,0,0,.18);padding:10px 12px}}
+  @media(max-width:430px){.readouts{grid-template-columns:1fr}.slider{grid-template-columns:66px 1fr 44px}canvas{height:205px}.cite::after{display:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>A reduced theory of fish swimming</h1>
+    <p class="abstract">We are building one usable model, not a catalogue of every fish detail. The path is simple: draw a body wave, ask how water pushes back, pay the drag cost, then add wake timing, muscle filtering, fins, and outside vortices. If a term stays in the model, it must change something you can see in the diagram.</p>
+    <div class="top"><a href="fish-biomechanics-equation-animations-technical.html">Equation cards</a><a href="fish-biomechanics-paper-map-technical.html">Papers</a><a href="#glossary">Glossary</a><button id="reset">Reset variables</button></div>
+  </header>
+
+  <section class="layout">
+    <div class="story" id="story"></div>
+    <aside class="lab">
+      <div class="lab-head"><strong id="labTitle">Live diagram</strong><span id="labStep">1</span></div>
+      <div class="canvas-wrap"><canvas id="scene" aria-label="Fish mechanics diagram"></canvas></div>
+      <div class="controls">
+        <div class="control-title"><strong>Variables</strong></div>
+        <div class="sliders" id="sliders"></div>
+        <div class="readouts" id="readouts"></div>
+        <div class="term-card" id="termCard" hidden>
+          <strong>Tap a term</strong>
+          <p>Definitions from the equations appear here.</p>
+        </div>
+      </div>
+      <div class="branch-status" id="branchStatus" hidden>
+        <strong>Active branch</strong>
+        <p id="branchNote"></p>
+        <button id="clearBranch" class="clear">Return to main line</button>
+      </div>
+    </aside>
+  </section>
+
+  <section class="final">
+    <h2>The model we keep</h2>
+    <div class="final-grid">
+      <div class="equation math" id="finalEq"></div>
+      <p>The reduced model keeps only effects you can see and tune: body-wave shape, added-mass thrust, drag, Strouhal wake quality, the body’s amplitude filter, fin assist, and work from environmental wakes. It is small enough to animate, but each term still points to a physical mechanism in the papers.</p>
+    </div>
+  </section>
+
+  <section class="glossary" id="glossary">
+    <h2>Equation glossary</h2>
+    <div class="glossary-grid" id="glossaryList"></div>
+  </section>
+
+  <section class="references">
+    <h2>Sources used in the model</h2>
+    <ol id="refs"></ol>
+  </section>
+</main>
+<script>
+(() => {
+  'use strict';
+  const TAU=Math.PI*2,rho=1000,nu=1e-6;
+  const C={ink:'#111',blue:'#1687a7',red:'#d94f26',gold:'#b88700',green:'#277a4e',violet:'#6b55aa',body:'#f5f0e4',black:'#222'};
+  const refs=[
+    ['Lighthill, “Note on the swimming of slender fish,” 1960','https://doi.org/10.1017/S0022112060001110','Classic slender-body theory: a traveling body wave produces reactive thrust by accelerating water sideways.'],
+    ['Lighthill, “Large-amplitude elongated-body theory of fish locomotion,” 1971','https://doi.org/10.1098/rspb.1971.0085','Extends the slender-body model to realistic large-amplitude fish motions and local normal forces.'],
+    ['Webb, Hydrodynamics and energetics of fish propulsion, 1975','https://waves-vagues.dfo-mpo.gc.ca/library-bibliotheque/358401.pdf','Covers drag, thrust, power cost, and fish swimming performance.'],
+    ['Triantafyllou, Triantafyllou & Yue, “Hydrodynamics of Fishlike Swimming,” 2000','https://doi.org/10.1146/annurev.fluid.32.1.33','Fluid-mechanics review linking Strouhal number, vortex wakes, flapping foils, and efficient propulsion.'],
+    ['Müller & van Leeuwen, “Undulatory fish swimming: from muscles to flow,” 2006','https://doi.org/10.1111/j.1467-2979.2006.00210.x','Connects axial muscle activation and body bending to the flow and wake produced by undulatory swimming.'],
+    ['Tytell et al., “Interactions between internal forces, body stiffness, and fluid environment,” 2010','https://doi.org/10.1073/pnas.1011564107','Neuromechanical model showing motion emerges from muscle, stiffness, damping, inertia, and fluid load.'],
+    ['Lauder & Drucker, “Morphology and Experimental Hydrodynamics of Fish Fin Control Surfaces,” 2004','https://doi.org/10.1109/JOE.2004.833219','Shows fins as flexible active control surfaces for thrust, braking, steering, and trim.'],
+    ['Alben, Madden & Lauder, “The mechanics of active fin-shape control,” 2007','https://doi.org/10.1098/rsif.2006.0181','Elastic fin-ray model: fish can set preferred curvature and fluid loads bend the fin.'],
+    ['Liao, “A review of fish swimming mechanics and behaviour in altered flows,” 2007','https://doi.org/10.1098/rstb.2007.2082','Review of Kármán gaiting, turbulence, and how fish exploit environmental vortices.'],
+    ['Liao, “Fish swimming efficiency,” 2022','https://doi.org/10.1016/j.cub.2022.04.073','Explains efficient swimming through body-wave timing, wake interaction, and flow coupling.'],
+    ['Eloy, “Scaling the tail beat frequency and swimming speed,” 2023','https://doi.org/10.1038/s41467-023-41368-6','Scaling law for how swimming speed relates to tailbeat frequency and body length.'],
+    ['Lauder, “Fish Locomotion: Recent Advances and New Directions,” 2015','https://doi.org/10.1146/annurev-marine-010814-015614','Review of fish kinematics, fins, center-of-mass motion, and flow visualization.'],
+    ['Wardle, Videler & Altringham, “Tuning in to fish swimming waves,” 1995','https://doi.org/10.1242/jeb.198.8.1629','Explains the timing relationship between muscle activation, strain, body form, and swimming mode.'],
+    ['Drucker & Lauder, “Forces, Fishes, and Fluids,” 2002','https://doi.org/10.1152/nips.01398.2002','Explains how wake momentum and vortex impulse reveal forces produced by swimming fish.']
+  ];
+  const canvas=document.getElementById('scene'),ctx=canvas.getContext('2d');
+  const defaults={A:.18,f:1.25,U:1.1,L:.36,ma:1,CD:.11,muscle:1.15,EI:1.05,damp:.45,fin:.35,wake:.30,phase:55};
+  const state={step:0,branch:'none',t:0,last:0,vals:{...defaults}};
+  const vars={A:['amplitude',.08,.4,.005,' m'],f:['frequency',.5,3,.01,' Hz'],U:['speed',.25,2.5,.01,' m/s'],ma:['added mass',.3,2.4,.01,'×'],CD:['drag',.03,.3,.005,''],muscle:['muscle',.25,2.4,.01,'×'],EI:['stiffness',.25,3.2,.01,'×'],damp:['damping',0,2.2,.01,'×'],fin:['fin gain',0,1.5,.01,'×'],wake:['wake force',0,1.5,.01,'×'],phase:['phase',-180,180,1,'°']};
+  const termDefs={
+    y:['y(s,t)','sideways centerline displacement at body coordinate s and time t.'],s:['s','body coordinate: 0 at the head, 1 at the tail.'],t:['t','time.'],a:['a(s)','amplitude envelope; it grows toward the tail.'],A:['A','tail-beat amplitude, the size of the lateral sweep.'],f:['f','tail-beat frequency in cycles per second.'],k:['k','body-wave spatial frequency.'],L:['L','body length used to convert coordinate slope into physical slope.'],U:['U','forward swimming speed.'],w:['w','normal velocity of a body section relative to the water.'],ma:['mₐ','added mass: nearby water accelerated with each body section.'],qy:['qᵧ','sideways reactive force from added mass.'],Tadded:['T_added','forward thrust from added-mass reaction at the tail.'],D:['D','drag force opposing forward motion.'],rho:['ρ','water density.'],S:['S','reference area used by the drag estimate.'],CD:['C_D','drag coefficient.'],Pdrag:['P_drag','useful power spent against drag.'],St:['St','Strouhal number: tail sweep speed divided by swimming speed.'],Aeff:['A_eff','visible effective amplitude after muscle drive is filtered by body stiffness, damping, and water load.'],Phi:['Φ(St)','wake-quality multiplier; highest near the efficient Strouhal range.'],muscle:['muscle','nondimensional muscle drive.'],EI:['EI','bending stiffness of the body.'],damping:['damping','mechanical damping that dissipates body bending.'],dL:['dL','small lift force on a fin strip.'],V:['V','relative flow speed over a fin strip.'],c:['c','local fin chord length.'],CL:['C_L','lift coefficient.'],ds:['ds','small strip length along the fin.'],Tfin:['T_fin','thrust or trim contribution from fins.'],finGain:['fin_gain','single knob for fin control strength.'],Sfin:['S_fin','effective fin area.'],Penv:['P_env','power supplied by or lost to incoming vortices.'],F0:['F₀','amplitude of the environmental vortex force.'],phi:['φ','phase between the fish motion and incoming vortex force.'],eta:['η','muscle efficiency.'],Fenv:['F_env','net environmental force from the wake or vortex street.'],T:['T','total forward thrust.'],Ka:['K_a','lumped added-mass thrust coefficient.'],M:['M','fish mass in the reduced acceleration equation.'],Udot:['U_dot','forward acceleration.'],Pmuscle:['P_muscle','metabolic muscle power required after environmental work is counted.']
+  };
+  function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  function tm(id,label){const d=termDefs[id]||[id,''];return `<button type="button" class="term" data-term="${esc(id)}" title="${esc(d[0]+': '+d[1])}">${label||esc(d[0])}</button>`}
+  function frac(n,d){return `<span class="frac"><span>${n}</span><span>${d}</span></span>`}
+  function eq(...lines){return lines.map(x=>`<span class="eqline">${x}</span>`).join('')}
+
+  const chapters=[
+    {title:'The kinematic wave',keys:['A','f','U'],cite:[13,12],eq:eq(
+      `${tm('y','y')}(${tm('s','s')},${tm('t','t')}) = ${tm('a','a')}(${tm('s','s')}) sin(2π(${tm('k','k')}${tm('s','s')} − ${tm('f','f')}${tm('t','t')}))`,
+      `${tm('a','a')}(${tm('s','s')}) = ${tm('A','A')}·${tm('s','s')}<sup>1.45</sup>(0.18 + 0.82${tm('s','s')})`
+    ),p:['We start with the most forgiving picture: the fish is a centerline. The coordinate s runs from head to tail, and the wave travels backward along that line. This is a shape-first model: it shows what the fish looks like before we explain why it moves.','These two knobs carry through the whole model: amplitude A sets how far the tail sweeps, and frequency f sets how often it sweeps.'],after:'Next we ask what water does when this moving centerline pushes it sideways.',branches:[]},
+    {title:'Water inertia becomes thrust',keys:['A','f','U','ma'],cite:[1,2],eq:eq(
+      `${tm('w','w')} = ${tm('y','y')}<sub>t</sub> + ${tm('U','U')}${tm('y','y')}<sub>s</sub>/${tm('L','L')}`,
+      `${tm('qy','q<sub>y</sub>')} = −${tm('ma','m<sub>a</sub>')} D${tm('w','w')}/D${tm('t','t')}`,
+      `${tm('Tadded','T<sub>added</sub>')} ∝ ${tm('ma','m<sub>a</sub>')}(${tm('f','f')}${tm('A','A')})<sup>2</sup>`
+    ),p:['The moving body has to shove water out of the way. Elongated-body theory treats the nearby water as extra mass that each body section has to move. Most of the reaction is sideways, but the tail is angled, so part of the reaction becomes forward thrust.','This is the first real thrust term. It grows with added mass and roughly with the square of tail-beat speed.'],after:'Thrust is only half the story; it must beat the drag bill.',branches:[]},
+    {title:'Drag sets the cost of speed',keys:['U','CD','A','f'],cite:[3],eq:eq(
+      `${tm('D','D')} = ${frac('1','2')}${tm('rho','ρ')}${tm('U','U')}<sup>2</sup>${tm('S','S')}${tm('CD','C<sub>D</sub>')}`,
+      `${tm('Pdrag','P<sub>drag</sub>')} = ${tm('D','D')}·${tm('U','U')}`
+    ),p:['Drag is the price of steady swimming. Push the speed up a little and the bill rises fast: drag scales like U², while useful power scales like U³.','The wave has to balance the drag force D, and the muscles have to supply the drag power D·U.'],after:'Now we need a rule for whether a tail beat spends energy well or poorly.',branches:[]},
+    {title:'The wake selects useful timing',keys:['A','f','U'],cite:[4,11],eq:eq(
+      `${tm('St','St')} = ${frac(`${tm('f','f')}(2${tm('Aeff','A<sub>eff</sub>')})`,tm('U','U'))}`,
+      `${tm('Phi','Φ')}(${tm('St','St')}) = exp(−((${tm('St','St')} − 0.32)/0.16)<sup>2</sup>)`
+    ),p:['A tail beat is useful only when its timing matches the forward flow. The Strouhal number compares tail sweeping speed with swimming speed.','When St sits in the useful range, the wake forms a reverse Kármán street: an organized vortex pattern that sends momentum backward and pushes the fish forward. We represent that with Φ(St), a wake-quality multiplier.'],after:'So the water favors some tail timings over others. Next we ask how the body creates the wave.',branches:['highSt']},
+    {title:'Muscle drive is filtered by the body',keys:['A','muscle','EI','damp','ma'],cite:[5,6],eq:eq(
+      `${tm('Aeff','A<sub>eff</sub>')} = ${frac(`${tm('A','A')}·${tm('muscle','muscle')}`,`${tm('EI','EI')} + ${tm('damping','damping')} + ${tm('ma','m<sub>a</sub>')}`)}`
+    ),p:['Muscles do not draw the curve directly. They bend the body, and stiffness, damping, inertia, and water load decide how much bend appears.','For this page, the useful simplification is an effective amplitude. More muscle drive increases it; stiffness, damping, and added water mass reduce it.'],after:'The body-and-tail wave now has an inside cause. Fins add local control forces.',branches:['stiff']},
+    {title:'Fin control',keys:['fin','U','A','f'],cite:[14,7,8],eq:eq(
+      `${tm('dL','dL')} = ${frac('1','2')}${tm('rho','ρ')}${tm('V','V')}<sup>2</sup>${tm('c','c')}${tm('CL','C<sub>L</sub>')}${tm('ds','ds')}`,
+      `${tm('Tfin','T<sub>fin</sub>')} ≈ ${tm('finGain','fin<sub>gain</sub>')}·${frac('1','2')}${tm('rho','ρ')}${tm('U','U')}<sup>2</sup>${tm('Sfin','S<sub>fin</sub>')}${tm('CL','C<sub>L</sub>')}`
+    ),p:['Fins behave like small flexible control surfaces. Each strip sees its own relative flow and produces lift and drag.','During cruising they are not the main engine, but they trim, steer, brake, and add small thrust corrections. We keep that effect as one fin-gain term.'],after:'The last outside influence is water that already contains vortices.',branches:['finsOnly']},
+    {title:'Ambient vortices can help or hurt',keys:['wake','phase','A','f'],cite:[9,10],eq:eq(
+      `${tm('Penv','P<sub>env</sub>')} = π${tm('f','f')}${tm('A','A')}${tm('F0','F<sub>0</sub>')} sin${tm('phi','φ')}`,
+      `${tm('Pmuscle','P<sub>muscle</sub>')} = max(0, ${tm('D','D')}${tm('U','U')} − ${tm('Penv','P<sub>env</sub>')})/${tm('eta','η')}`
+    ),p:['Real fish rarely swim in perfectly still water. A vortex street can apply a repeating force to the body.','The sign depends on timing. With the right phase, the flow gives energy back. With the wrong phase, the fish pays extra.'],after:'Now the pieces can be summed into the model we use.',branches:['badPhase']},
+    {title:'The reduced model',keys:['A','f','U','ma','muscle','EI','fin','wake'],cite:[1,2,3,4,5,7,9,10,11,12],eq:eq(
+      `${tm('T','T')} = ${tm('Ka','K<sub>a</sub>')}${tm('ma','m<sub>a</sub>')}(${tm('f','f')}${tm('Aeff','A<sub>eff</sub>')})<sup>2</sup>${tm('Phi','Φ')}(${tm('St','St')}) + ${tm('Tfin','T<sub>fin</sub>')} + ${tm('Fenv','F<sub>env</sub>')}`,
+      `${tm('D','D')} = ${frac('1','2')}${tm('rho','ρ')}${tm('U','U')}<sup>2</sup>${tm('S','S')}${tm('CD','C<sub>D</sub>')}`,
+      `${tm('M','M')} ${tm('Udot','U<sub>dot</sub>')} = ${tm('T','T')} − ${tm('D','D')}`
+    ),p:['The final model combines filtered body amplitude, added-mass thrust, wake quality, fin assist, environmental forcing, and drag.','What you see is M U_dot: when T−D is positive, the fish accelerates; when it is negative, the fish slows down or needs a different wave.'],after:'Use this model for the koi because each term changes the motion in a visible, tunable way.',branches:[]}
+  ];
+  const branchInfo={none:'No branch selected.',highSt:'The tail motion is large relative to forward speed. The high-Strouhal wake carries more lateral motion, so a smaller fraction becomes useful thrust.',stiff:'Muscle drive is present, but the body cannot bend much. A_eff and thrust fall.',badPhase:'Incoming vortices push at the wrong time. F_env changes sign, and the fish has to spend more muscle power.',finsOnly:'Fin forces steer and help, but the main body-and-tail wave is too small to carry cruising thrust.'};
+  function fmt(n){if(!Number.isFinite(n))return'—';const a=Math.abs(n);return a>=1000?n.toFixed(0):a>=100?n.toFixed(0):a>=10?n.toFixed(1):n.toFixed(2)}
+  function clamp(n,a,b){return Math.max(a,Math.min(b,n))}
+  function metrics(){let v=state.vals,A=state.branch==='stiff'?v.A*.38:state.branch==='finsOnly'?v.A*.16:v.A,U=state.branch==='highSt'?v.U*.55:v.U,phase=state.branch==='badPhase'?-65:v.phase,fin=state.branch==='finsOnly'?v.fin*2.2:v.fin;const Aeff=A*v.muscle/(v.EI+v.damp+v.ma),St=v.f*(2*Aeff)/U,phi=Math.exp(-Math.pow((St-.32)/.16,2)),Tadded=110*v.ma*Math.pow(v.f*Aeff,2)*phi,D=.5*rho*U*U*(.11*v.L*v.L)*v.CD,Tfin=8*fin*U*U*(.7+.55*fin),Fenv=22*v.wake*Math.sin(phase*Math.PI/180),T=Tadded+Tfin+Fenv,Penv=Math.PI*v.f*Aeff*20*v.wake*Math.sin(phase*Math.PI/180),Pmet=Math.max(0,D*U-Penv)/.48;return{U,fin,Aeff,St,phi,Tadded,D,Tfin,Fenv,T,Penv,Pmet,phase,lag:Math.atan2(v.damp,v.EI+v.ma),Re:U*v.L/nu}}
+  function citations(nums){return nums.map(n=>`<a class="cite" data-tip="${refs[n-1][2]}" title="${refs[n-1][2]}" href="${refs[n-1][1]}" target="_blank" rel="noreferrer">[${n}]</a>`).join(' ')}
+  const termTip=document.createElement('div');termTip.className='term-tip';termTip.hidden=true;document.body.append(termTip);
+  function termData(id){const d=termDefs[id]||[id,''];return{name:d[0],def:d[1]}}
+  function placeTip(x,y){termTip.style.left=clamp(x+12,8,innerWidth-termTip.offsetWidth-8)+'px';termTip.style.top=clamp(y+14,8,innerHeight-termTip.offsetHeight-8)+'px'}
+  function showTip(b,x,y){const d=termData(b.dataset.term);termTip.innerHTML=`<strong>${esc(d.name)}</strong><br>${esc(d.def)}`;termTip.hidden=false;placeTip(x,y)}
+  function termAnchor(id){return'term-'+id.replace(/[^a-z0-9_-]/gi,'-')}
+  function selectTerm(id){const d=termData(id),card=document.getElementById('termCard'),anchor=termAnchor(id);card.hidden=false;card.innerHTML=`<button type="button" class="term-close" id="termClose" aria-label="Close definition">×</button><strong>${esc(d.name)}</strong><p>${esc(d.def)}</p><a href="#${anchor}">Glossary entry</a>`;document.querySelectorAll('.term.active,.glossary-item.active').forEach(x=>x.classList.remove('active'));document.querySelectorAll('[data-term]').forEach(x=>{if(x.dataset.term===id)x.classList.add('active')});document.getElementById(anchor)?.classList.add('active')}
+  document.addEventListener('click',e=>{if(e.target.id==='termClose'){document.getElementById('termCard').hidden=true;return}const b=e.target.closest('.term');if(!b)return;e.preventDefault();selectTerm(b.dataset.term)});
+  document.addEventListener('pointerover',e=>{const b=e.target.closest('.term');if(b)showTip(b,e.clientX,e.clientY)});
+  document.addEventListener('pointermove',e=>{if(!termTip.hidden)placeTip(e.clientX,e.clientY)});
+  document.addEventListener('pointerout',e=>{if(e.target.closest('.term'))termTip.hidden=true});
+  document.addEventListener('focusin',e=>{const b=e.target.closest?.('.term');if(!b)return;const r=b.getBoundingClientRect();showTip(b,r.left,r.bottom)});
+  document.addEventListener('focusout',e=>{if(e.target.closest?.('.term'))termTip.hidden=true});
+  function buildStory(){const root=document.getElementById('story');root.textContent='';chapters.forEach((ch,i)=>{const sec=document.createElement('section');sec.className='chapter'+(ch.branches.length?'':' no-branches')+(i===state.step?' active':'');const branches=ch.branches.map(id=>`<div class="branch-card ${state.branch===id?'active':''}"><h3>${id==='highSt'?'High Strouhal':id==='stiff'?'Stiff body':id==='badPhase'?'Bad phase':'Fins only'}</h3><p>${branchInfo[id]}</p><button data-branch="${id}" data-step="${i}">Run this branch</button></div>`).join('');sec.innerHTML=`<div class="chapter-main"><div class="chapter-number">${i+1}</div><h2>${ch.title}</h2>${ch.p.map(p=>`<p>${p}</p>`).join('')}<div class="equation math">${ch.eq}</div><p>${ch.after}</p><p class="source">Sources: ${citations(ch.cite)}</p></div><aside class="branch-column">${branches}</aside>`;root.append(sec)});root.querySelectorAll('button[data-step]').forEach(b=>b.onclick=()=>{setStep(+b.dataset.step);if(b.dataset.branch){state.branch=b.dataset.branch;renderAll()}})}
+  function setStep(i){const next=clamp(i,0,chapters.length-1);if(next===state.step){syncChapterClasses();return}state.step=next;buildControls();renderText();syncChapterClasses()}
+  function buildControls(){const root=document.getElementById('sliders');root.textContent='';const keys=[...new Set(chapters[state.step].keys)];for(const k of keys){const [lab,min,max,step,unit]=vars[k],row=document.createElement('div');row.className='slider';row.innerHTML=`<label>${lab}</label><input type="range" min="${min}" max="${max}" step="${step}" value="${state.vals[k]}"><output></output>`;const input=row.querySelector('input'),out=row.querySelector('output');input.oninput=()=>{state.vals[k]=+input.value;out.value=fmt(state.vals[k])+unit;renderText()};out.value=fmt(state.vals[k])+unit;root.append(row)}}
+  function renderText(){const m=metrics();document.getElementById('labTitle').textContent=chapters[state.step].title;document.getElementById('labStep').textContent='section '+(state.step+1);document.getElementById('readouts').innerHTML=[[tm('Aeff','A<sub>eff</sub>'),m.Aeff,'m'],[tm('St','St'),m.St,''],[`${tm('T','T')}−${tm('D','D')}`,m.T-m.D,'N'],[tm('Pmuscle','P<sub>muscle</sub>'),m.Pmet,'W']].map(([k,v,u])=>`<div class="readout"><span>${k}</span><b>${fmt(v)}${u}</b></div>`).join('');document.getElementById('finalEq').innerHTML=eq(`${tm('Aeff','A<sub>eff</sub>')} = ${frac(`${tm('A','A')}·${tm('muscle','muscle')}`,`${tm('EI','EI')} + ${tm('damping','damping')} + ${tm('ma','m<sub>a</sub>')}`)} = ${fmt(m.Aeff)} m`,`${tm('St','St')} = ${frac(`${tm('f','f')}(2${tm('Aeff','A<sub>eff</sub>')})`,tm('U','U'))} = ${fmt(m.St)}; ${tm('Phi','Φ')}(${tm('St','St')}) = ${fmt(m.phi)}`,`${tm('T','T')} = ${tm('Ka','K<sub>a</sub>')}${tm('ma','m<sub>a</sub>')}(${tm('f','f')}${tm('Aeff','A<sub>eff</sub>')})<sup>2</sup>${tm('Phi','Φ')} + ${tm('Tfin','T<sub>fin</sub>')} + ${tm('Fenv','F<sub>env</sub>')} = ${fmt(m.T)} N`,`${tm('D','D')} = ${frac('1','2')}${tm('rho','ρ')}${tm('U','U')}<sup>2</sup>${tm('S','S')}${tm('CD','C<sub>D</sub>')} = ${fmt(m.D)} N`,`${tm('M','M')} ${tm('Udot','U<sub>dot</sub>')} = ${tm('T','T')} − ${tm('D','D')} = ${fmt(m.T-m.D)} N`,`${tm('Pmuscle','P<sub>muscle</sub>')} = max(0, ${tm('D','D')}${tm('U','U')} − ${tm('Penv','P<sub>env</sub>')})/${tm('eta','η')} = ${fmt(m.Pmet)} W`);const status=document.getElementById('branchStatus');status.hidden=state.branch==='none';document.getElementById('branchNote').textContent=branchInfo[state.branch]}
+  let scrollRaf=0;
+  function syncChapterClasses(){document.querySelectorAll('.chapter').forEach((sec,i)=>sec.classList.toggle('active',i===state.step))}
+  function syncStepToScroll(){const nodes=[...document.querySelectorAll('.chapter')];if(!nodes.length)return;const anchor=innerHeight*.45;let best=state.step,dist=Infinity;nodes.forEach((sec,i)=>{const r=sec.getBoundingClientRect(),mid=(r.top+r.bottom)/2,d=Math.abs(mid-anchor);if(d<dist){dist=d;best=i}});setStep(best)}
+  function queueScrollSync(){if(scrollRaf)return;scrollRaf=requestAnimationFrame(()=>{scrollRaf=0;syncStepToScroll()})}
+  function renderAll(){buildStory();buildControls();renderText();syncChapterClasses();queueScrollSync()}
+  function fit(){const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2),w=Math.max(420,r.width|0),h=Math.max(250,r.height|0);if(canvas.width!==w*d||canvas.height!==h*d){canvas.width=w*d;canvas.height=h*d}ctx.setTransform(d,0,0,d,0,0);return[w,h]}
+  function bg(w,h){ctx.fillStyle='#dff2ee';ctx.fillRect(0,0,w,h);ctx.strokeStyle='rgba(17,17,17,.10)';for(let i=0;i<6;i++){let y=24+i*h/6,x=(i*91+state.t*18)%(w+100)-80;ctx.beginPath();ctx.moveTo(x,y);ctx.quadraticCurveTo(x+38,y-5,x+90,y+2);ctx.stroke()}ctx.fillStyle='rgba(22,135,167,.12)';ctx.beginPath();ctx.ellipse(w*.70,h*.70,w*.55,h*.38,.2,0,TAU);ctx.fill()}
+  function pts(w,h,m){const n=54,L=Math.min(w*.62,h*1.75),head=w*.72,y0=h*.52,amp=h*.34*(m.Aeff/Math.max(.02,state.vals.A));return Array.from({length:n},(_,i)=>{const s=i/(n-1),env=Math.pow(s,1.45)*(.18+.82*s),x=head-s*L,y=y0+amp*env*Math.sin(TAU*(1.15*s-state.vals.f*state.t)-m.lag),hump=Math.exp(-Math.pow((s-.32)/.32,2)),width=Math.max(3,L*(.018+.12*hump*(1-s*.5)+.035*Math.exp(-s*8)));return{x,y,s,width,act:Math.sin(TAU*(1.15*s-state.vals.f*state.t+.16))}})}
+  function ang(p,i){let a=p[Math.max(0,i-1)],b=p[Math.min(p.length-1,i+1)];return Math.atan2(b.y-a.y,b.x-a.x)}function pAt(p,s){return p[Math.round(s*(p.length-1))]}
+  function fishPath(p){const l=[],r=[];for(let i=0;i<p.length;i++){let a=ang(p,i),q=p[i];l.push([q.x+Math.cos(a+Math.PI/2)*q.width,q.y+Math.sin(a+Math.PI/2)*q.width]);r.push([q.x+Math.cos(a-Math.PI/2)*q.width,q.y+Math.sin(a-Math.PI/2)*q.width])}ctx.beginPath();ctx.moveTo(l[0][0],l[0][1]);for(let i=1;i<l.length;i++)ctx.lineTo(l[i][0],l[i][1]);for(let i=r.length-1;i>=0;i--)ctx.lineTo(r[i][0],r[i][1]);ctx.closePath()}
+  function drawFish(p){fishPath(p);ctx.fillStyle=C.body;ctx.fill();ctx.save();fishPath(p);ctx.clip();patch(p,.22,-.35,.08,.8,C.red);patch(p,.50,.18,.11,.65,C.red);patch(p,.66,-.08,.055,.45,C.black);ctx.restore();ctx.strokeStyle='rgba(17,17,17,.45)';ctx.beginPath();p.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));ctx.stroke()}
+  function patch(p,s,off,len,scale,color){let i=Math.round(s*(p.length-1)),q=p[i],a=ang(p,i),nx=Math.cos(a+Math.PI/2),ny=Math.sin(a+Math.PI/2);ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(q.x+nx*off*q.width,q.y+ny*off*q.width,len*150,scale*q.width,a,0,TAU);ctx.fill()}
+  function arrow(x,y,a,len,color,label){ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(a)*len,y+Math.sin(a)*len);ctx.stroke();let hx=x+Math.cos(a)*len,hy=y+Math.sin(a)*len;ctx.beginPath();ctx.moveTo(hx,hy);ctx.lineTo(hx-Math.cos(a-.45)*8,hy-Math.sin(a-.45)*8);ctx.lineTo(hx-Math.cos(a+.45)*8,hy-Math.sin(a+.45)*8);ctx.closePath();ctx.fill();if(label)tag(label,hx+5,hy-5,color)}function doubleArrow(x1,y1,x2,y2,color,label){const a=Math.atan2(y2-y1,x2-x1),len=Math.hypot(x2-x1,y2-y1);arrow(x1,y1,a,len,color,'');arrow(x2,y2,a+Math.PI,len,color,'');if(label)tag(label,(x1+x2)/2+5,(y1+y2)/2-4,color)}
+  function tag(t,x,y,color){ctx.font='13px "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif';ctx.fillStyle=color;ctx.fillText(t,x,y)}
+  function draw(){const[w,h]=fit(),m=metrics(),p=pts(w,h,m),step=state.step;bg(w,h);drawFish(p);let head=pAt(p,.03),mid=pAt(p,.48),tail=pAt(p,.96);tag('y(s,t)',mid.x-42,mid.y-22,C.blue);arrow(head.x+12,head.y-34,0,42+m.U*22,C.blue,'U');const ampPix=68*m.Aeff/Math.max(.02,state.vals.A);doubleArrow(tail.x+16,tail.y-ampPix/2,tail.x+16,tail.y+ampPix/2,C.gold,step>=4?'2A_eff':'2A');if(step>=1){for(let i=10;i<p.length;i+=9){let q=p[i];ctx.strokeStyle='rgba(22,135,167,.35)';ctx.beginPath();ctx.arc(q.x,q.y,q.width*(1.4+m.Aeff*7),0,TAU);ctx.stroke()}let sec=pAt(p,.78),si=Math.round(.78*(p.length-1)),na=ang(p,si)+Math.PI/2,sgn=sec.act>=0?1:-1;arrow(sec.x,sec.y,na+(sgn<0?Math.PI:0),22+16*Math.abs(sec.act),C.blue,'w');arrow(sec.x,sec.y,na+(sgn>=0?Math.PI:0),24+18*Math.abs(sec.act)*state.vals.ma,C.red,'q_y');arrow(tail.x,tail.y,0,clamp(m.Tadded*.09,18,100),C.gold,'T_added');tag('m_a',mid.x+48,mid.y+36,C.blue)}if(step>=2){arrow(mid.x+70,mid.y-36,Math.PI,clamp(m.D*.22,26,100),C.red,'D');tag('P=D·U',28,h-24,C.red)}if(step>=3){for(let i=0;i<6;i++){let x=tail.x-30-i*40-(state.t*18%40),y=tail.y+Math.sin(i*Math.PI+state.t*TAU*state.vals.f)*22*m.Aeff/Math.max(.02,state.vals.A);ctx.strokeStyle=i%2?C.blue:C.red;ctx.beginPath();ctx.ellipse(x,y,13+i,8+i*.4,0,0,TAU);ctx.stroke()}tag('St / Φ',w-86,h-24,m.phi>.45?C.green:C.red)}if(step>=4){for(let i=5;i<p.length;i+=5){let q=p[i],a=ang(p,i)+Math.PI/2;ctx.strokeStyle=q.act>0?C.red:C.blue;ctx.beginPath();ctx.moveTo(q.x+Math.cos(a)*q.width*.5,q.y+Math.sin(a)*q.width*.5);ctx.lineTo(q.x+Math.cos(a)*q.width*1.25,q.y+Math.sin(a)*q.width*1.25);ctx.stroke()}tag('A_eff filter',28,28,C.violet)}if(step>=5){let q=pAt(p,.22),a=ang(p,12);for(const side of[1,-1]){let rx=q.x+Math.cos(a+side*Math.PI/2)*q.width,ry=q.y+Math.sin(a+side*Math.PI/2)*q.width;arrow(rx,ry,a+side*1.2,22+m.fin*20,C.blue,side>0?'fin lift':'');arrow(rx,ry,Math.PI,12+m.fin*13,C.red,side>0?'fin drag':'')}}if(step>=6){let pos=m.Penv>=0;for(let i=0;i<4;i++){let vx=head.x+78+i*34-(state.t*22%34),vy=head.y+(i%2?18:-18);ctx.strokeStyle=i%2?C.blue:C.red;ctx.beginPath();ctx.ellipse(vx,vy,12,8,0,0,TAU);ctx.stroke()}arrow(head.x+72,head.y+30,pos?0:Math.PI,clamp(Math.abs(m.Fenv)*2,14,80),pos?C.green:C.red,'F_env');tag('P_env',head.x+34,head.y+55,pos?C.green:C.red)}if(step>=7){let net=m.T-m.D;arrow(mid.x+70,mid.y+12,net>=0?0:Math.PI,clamp(Math.abs(net)*.36,20,110),net>=0?C.green:C.red,'net force');tag('T = T_added + T_fin + F_env',mid.x-95,mid.y-58,C.gold)}requestAnimationFrame(frame)}
+  function frame(now=0){let s=now/1000;state.t+=Math.min(1/20,s-(state.last||s));state.last=s;draw()}
+  document.getElementById('reset').onclick=()=>{state.vals={...defaults};state.branch='none';renderAll()};document.getElementById('clearBranch').onclick=()=>{state.branch='none';renderAll()};
+  document.getElementById('glossaryList').innerHTML=Object.entries(termDefs).map(([id,[name,def]])=>`<div class="glossary-item" id="${termAnchor(id)}"><strong>${esc(name)}</strong><p>${esc(def)}</p></div>`).join('');
+  document.getElementById('refs').innerHTML=refs.map(([name,url,note],i)=>`<li id="ref-${i+1}"><a href="${url}" target="_blank" rel="noreferrer">${name}</a><span class="small"> — ${note}</span></li>`).join('');
+  addEventListener('scroll',queueScrollSync,{passive:true});
+  addEventListener('resize',queueScrollSync);
+  renderAll();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
