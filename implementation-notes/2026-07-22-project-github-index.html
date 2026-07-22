@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spec — project GitHub index</title>
+<meta name="task" content="Make project cards clickable with previews and expand data from GitHub">
+<meta name="date-started" content="2026-07-22">
+<meta name="date-updated" content="2026-07-22">
+<meta name="status" content="shipped">
+<meta name="blast-radius" content="low">
+<meta name="tags" content="projects,github,cards">
+<meta name="related" content="2026-07-22-project-card-polish.html">
+<style>
+  body { font: 14px/1.45 -apple-system, system-ui, sans-serif; max-width: 880px; margin: 1.5rem auto; padding: 0 1rem; color: #111; }
+  h1 { font-size: 20px; margin: 0 0 .25rem; }
+  h2 { font-size: 15px; margin: 1.4rem 0 .4rem; border-bottom: 1px solid #ddd; padding-bottom: .2rem; }
+  table { border-collapse: collapse; width: 100%; margin: .4rem 0 .8rem; }
+  th, td { border: 1px solid #ddd; padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: #f6f6f6; font-weight: 600; }
+  code { background: #f1f1f1; padding: 1px 4px; border-radius: 3px; font-size: 12.5px; }
+  ul { margin: .3rem 0 .8rem 1.2rem; padding: 0; }
+  .blast-low { color: #2a7a2a; }
+  .meta { color: #555; font-size: 12.5px; margin-bottom: .8rem; }
+  .kv { display: grid; grid-template-columns: 140px 1fr; gap: 2px 14px; font-size: 13px; margin: .4rem 0 1rem; }
+  .kv b { color: #444; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>Project GitHub index</h1>
+<p class="meta"><code>master</code> · worktree <code>/Users/anishthite/workspace/anishthite.github.io</code> · 2026-07-22 · status <b>shipped</b> · blast <span class="blast-low">low</span></p>
+
+<h2>Summary</h2>
+<div class="kv">
+  <b>Goal</b><div>Make every project card clickable, visual, unnumbered, and backed by more GitHub-indexed data.</div>
+  <b>Source</b><div>GitHub API <code>/users/anishthite/repos</code> plus existing project data.</div>
+  <b>Surface</b><div><code>/projects.html</code>.</div>
+  <b>Schema</b><div>Extend JSON objects with <code>preview</code>.</div>
+  <b>Mobile</b><div>One-column cards with generated preview images.</div>
+  <b>Open Qs</b><div>0.</div>
+</div>
+
+<h2>Files</h2>
+<table>
+  <tr><th>Path</th><th>Kind</th><th>Delta</th></tr>
+  <tr><td><code>projects.html</code></td><td>touch</td><td>Clickable preview-card renderer and expanded <code>#projects-data</code>.</td></tr>
+</table>
+
+<h2>Decisions</h2>
+<table>
+  <tr><th>ID</th><th>Choice · Rationale</th></tr>
+  <tr><td>D-001</td><td>Use generated SVG thumbnails. GitHub repos do not all expose screenshots.</td></tr>
+  <tr><td>D-002</td><td>Keep selected repos with useful descriptions. Empty/private-context repos stay out until copy exists.</td></tr>
+</table>
+
+<h2>Definition of done</h2>
+<ul>
+  <li>Done · No visible numbering.</li>
+  <li>Done · No top metadata line.</li>
+  <li>Done · Every card has a preview image and whole-card link.</li>
+  <li>Done · GitHub-indexed projects are present in <code>#projects-data</code>.</li>
+  <li>Done · Static and browser checks pass.</li>
+</ul>
+</body>
+</html>

@@ -12,17 +12,23 @@
     .about-main { padding: 42px 0 72px; }
     .about-hero { max-width: 760px; padding-bottom: 34px; }
     .link-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-    .link-stack a, .cv-card a { border: 1px solid var(--rule); padding: 5px 9px; text-decoration: none !important; }
+    .link-stack a { border: 1px solid var(--rule); padding: 5px 9px; text-decoration: none !important; }
     .about-kicker, .about-meta { color: var(--muted); font-size: .9rem; }
     .about-lede { color: var(--muted) !important; font-size: clamp(1.1rem, 2vw, 1.34rem); max-width: 720px !important; }
     .about-section { border-top: 1px solid var(--rule); padding: 28px 0; }
     .thread-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .thread-card, .cv-card { border: 1px solid var(--rule); padding: 14px; background: rgba(255,255,255,.16); }
+    .thread-card, .cv-panel, .cv-entry { border: 1px solid var(--rule); padding: 14px; background: rgba(255,255,255,.16); }
     .about-list { columns: 2; column-gap: 34px; padding-left: 1.1rem !important; }
-    .cv-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center; }
-    #portfolio { position: relative; top: -20px; }
+    .cv-contact { color: var(--muted) !important; }
+    .cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+    .cv-panel p, .cv-entry p { margin-bottom: .45rem; }
+    .cv-entry { margin-top: 12px; }
+    .cv-entry header { display: flex; justify-content: space-between; gap: 16px; border: 0 !important; padding: 0; margin: 0 0 6px; }
+    .cv-entry h4 { margin: 0 0 .2rem; font-size: 1.05rem; }
+    .cv-entry .when, .cv-entry .role, .cv-entry .place { color: var(--muted); }
+    .cv-entry ul { margin: 8px 0 0; padding-left: 1.1rem !important; }
     @media (max-width: 760px) {
-      .about-hero, .thread-grid, .cv-card { grid-template-columns: 1fr; }
+      .about-hero, .thread-grid, .cv-grid { grid-template-columns: 1fr; }
       .about-photo img { width: min(230px, 70vw); }
       .about-list { columns: 1; }
     }
@@ -86,13 +92,66 @@
     <section id="cv" class="about-section" aria-labelledby="cv-heading">
       <span id="portfolio" aria-hidden="true"></span>
       <h2 id="cv-heading">CV</h2>
-      <div class="cv-card">
-        <div>
-          <h3>Formal version</h3>
-          <p class="about-meta">For the traditional resume view, open the PDF. Keeping it as a click-through makes this page readable.</p>
-        </div>
-        <a href="Anish_Thite_Resume.pdf">Read CV PDF</a>
+      <p class="cv-contact"><strong>Anish Thite</strong> · <a href="mailto:anishthite@gmail.com">anishthite@gmail.com</a> · (203) 909-9118 · anishthite.github.io</p>
+
+      <div class="cv-grid">
+        <article class="cv-panel">
+          <h3>Education</h3>
+          <p><strong>Georgia Institute of Technology</strong> — Atlanta, GA</p>
+          <p>M.S. in Computer Science, Intelligence and Devices threads, expected May 2022. B.S., May 2021.</p>
+          <p>Overall GPA: 3.78/4.00. Major GPA: 4.00/4.00.</p>
+        </article>
+        <article class="cv-panel">
+          <h3>Skills</h3>
+          <p><strong>Languages</strong> — Python, Java, Rust, C, Scala, Bash, JS.</p>
+          <p><strong>Tools / OS</strong> — Git, AWS, GCP, Firebase, Docker, Linux, Windows, SQL, Slurm, CUDA.</p>
+          <p><strong>Frameworks</strong> — Flask, Django, React, PyTorch, TensorFlow, NumPy, Pandas.</p>
+        </article>
       </div>
+
+      <h3>Experience</h3>
+      <article class="cv-entry">
+        <header><div><h4>Amazon AWS Migration Hub Team</h4><p class="role">Software Design Intern · Boston, MA</p></div><p class="when">May 2021 – July 2021</p></header>
+        <ul><li>Worked on a data generation service for testing AWS Migration Hub recommendations.</li></ul>
+      </article>
+      <article class="cv-entry">
+        <header><div><h4>Georgia Tech Research Institute</h4><p class="role">Graduate Research Assistant · Atlanta, GA</p></div><p class="when">January 2019 – Present</p></header>
+        <ul>
+          <li>Created GAN-based waveform generation and simulation systems.</li>
+          <li>Used genetic programming to evolve machine learning models with the GTRI Evolutionary Auto-ML Framework.</li>
+          <li>Expanded the library to perform neural network architecture search using Python, MySQL, Scikit-learn, Keras, and TensorFlow.</li>
+          <li>Out-performed Google AutoML on the Wikidetox toxic comment classification dataset.</li>
+          <li>Student workshop paper, “Concurrent Neural Tree and Data Preprocessing AutoML for Image Classification,” accepted at GECCO 2021.</li>
+        </ul>
+      </article>
+      <article class="cv-entry">
+        <header><div><h4>The Agency (AI/ML Club)</h4><p class="role">External Relations Officer / President · Atlanta, GA</p></div><p class="when">January 2020 – May 2021</p></header>
+        <ul><li>Served as sysadmin for the club server, lectured on NLP topics, coordinated guest lecturers, and advised project groups.</li></ul>
+      </article>
+      <article class="cv-entry">
+        <header><div><h4>EleutherAI</h4><p class="role">Researcher / Software Engineer · Atlanta, GA</p></div><p class="when">July 2020 – Present</p></header>
+        <ul>
+          <li>Contributed to replicating and open-sourcing GPT-3-style weights, and wrote an open-source codebase for language model evaluation.</li>
+          <li>Worked on HTML and PDF text extraction and filtering for The Pile, one of the world’s largest text datasets.</li>
+          <li>Efficiently scraped, filtered, and parsed Hacker News for language model training.</li>
+          <li><a href="https://arxiv.org/abs/2101.00027">arxiv.org/abs/2101.00027</a></li>
+          <li><a href="https://github.com/EleutherAI/lm_evaluation_harness">github.com/EleutherAI/lm_evaluation_harness</a></li>
+        </ul>
+      </article>
+      <article class="cv-entry">
+        <header><div><h4>NLP and Computational Social Science Lab</h4><p class="role">Student Researcher · Atlanta, GA</p></div><p class="when">November 2019 – Present</p></header>
+        <ul>
+          <li>Worked under Dr. Diyi Yang on keyword-based neural humor generation and classification using transformers.</li>
+          <li>Studied effects of humor on mental health and the COVID pandemic.</li>
+        </ul>
+      </article>
+      <article class="cv-entry">
+        <header><div><h4>High-Performance Architecture Lab</h4><p class="role">Student Researcher · Atlanta, GA</p></div><p class="when">August 2019 – December 2019</p></header>
+        <ul>
+          <li>Researched deep learning tasks on edge devices.</li>
+          <li>Incorporated speech recognition and conversation models, including cosine-similarity response matching, on Raspberry Pis.</li>
+        </ul>
+      </article>
     </section>
   </main>
 </body>
