@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spec — about projects cleanup</title>
+<meta name="task" content="Hide posts, fold CV into About, and prepare Projects data system">
+<meta name="date-started" content="2026-07-22">
+<meta name="date-updated" content="2026-07-22">
+<meta name="status" content="shipped">
+<meta name="blast-radius" content="low">
+<meta name="tags" content="about,projects,posts,cv">
+<meta name="related" content="2026-07-22-projects-view-switcher.html">
+<style>
+  body { font: 14px/1.45 -apple-system, system-ui, sans-serif; max-width: 880px; margin: 1.5rem auto; padding: 0 1rem; color: #111; }
+  h1 { font-size: 20px; margin: 0 0 .25rem; }
+  h2 { font-size: 15px; margin: 1.4rem 0 .4rem; border-bottom: 1px solid #ddd; padding-bottom: .2rem; }
+  table { border-collapse: collapse; width: 100%; margin: .4rem 0 .8rem; }
+  th, td { border: 1px solid #ddd; padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: #f6f6f6; font-weight: 600; }
+  code { background: #f1f1f1; padding: 1px 4px; border-radius: 3px; font-size: 12.5px; }
+  ul { margin: .3rem 0 .8rem 1.2rem; padding: 0; }
+  .blast-low { color: #2a7a2a; }
+  .meta { color: #555; font-size: 12.5px; margin-bottom: .8rem; }
+  .kv { display: grid; grid-template-columns: 140px 1fr; gap: 2px 14px; font-size: 13px; margin: .4rem 0 1rem; }
+  .kv b { color: #444; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>About / Projects cleanup</h1>
+<p class="meta"><code>master</code> · worktree <code>/Users/anishthite/workspace/anishthite.github.io</code> · 2026-07-22 · status <b>shipped</b> · blast <span class="blast-low">low</span></p>
+
+<h2>Summary</h2>
+<div class="kv">
+  <b>Goal</b><div>Make <code>About</code> the CV/profile surface, hide posts from primary paths, and make <code>Projects</code> data-driven.</div>
+  <b>Source</b><div>Existing site, public GitHub profile/repos, Google Scholar, and current PDF resume.</div>
+  <b>Surface</b><div><code>index.html</code>, <code>about.html</code>, <code>projects.html</code>, essay navs.</div>
+  <b>Schema</b><div>None.</div>
+  <b>Mobile</b><div>Single-column cards and horizontal project table.</div>
+  <b>Open Qs</b><div>0.</div>
+</div>
+
+<h2>Files</h2>
+<table>
+  <tr><th>Path</th><th>Kind</th><th>Delta</th></tr>
+  <tr><td><code>index.html</code></td><td>touch</td><td>Replace posts landing with About/Projects landing.</td></tr>
+  <tr><td><code>about.html</code></td><td>touch</td><td>Expand profile and replace embedded resume with CV link.</td></tr>
+  <tr><td><code>projects.html</code></td><td>touch</td><td>Render cards, timeline, and table from one JSON data block.</td></tr>
+  <tr><td><code>essays/*.html</code></td><td>touch</td><td>Remove Posts/CV from primary nav while preserving direct post URLs.</td></tr>
+</table>
+
+<h2>Decisions</h2>
+<table>
+  <tr><th>ID</th><th>Choice · Rationale</th></tr>
+  <tr><td>D-001</td><td>Hide posts by removing the index list and nav links. Direct essay URLs remain available.</td></tr>
+  <tr><td>D-002</td><td>Keep CV as a PDF link inside <code>about.html#cv</code>. The page stays light and the resume remains readable.</td></tr>
+  <tr><td>D-003</td><td>Use one <code>application/json</code> project list. Adding a project once updates all views.</td></tr>
+</table>
+
+<h2>Tradeoffs</h2>
+<table>
+  <tr><th>ID</th><th>Picked over Rejected · Reason</th></tr>
+  <tr><td>T-001</td><td>Tiny inline renderer over duplicated static markup. Project data will change often.</td></tr>
+  <tr><td>T-002</td><td>Public-source About copy over private claims. Avoids inventing biographical facts.</td></tr>
+</table>
+
+<h2>Assumptions</h2>
+<ul>
+  <li>A-001 · Public GitHub and Scholar facts are safe for the site. If wrong: remove specific claims from <code>about.html</code>.</li>
+</ul>
+
+<h2>Reversibility</h2>
+<p>R-001 · <span class="blast-low">low</span>. Revert touched HTML files; no generated assets or data migrations.</p>
+
+<h2>Definition of done</h2>
+<ul>
+  <li>Done · Primary nav shows <code>About</code> and <code>Projects</code>, not <code>Posts</code> or standalone <code>CV</code>.</li>
+  <li>Done · <code>about.html</code> includes a readable CV entry point.</li>
+  <li>Done · <code>projects.html</code> has a single project data source.</li>
+  <li>Done · Static link and browser smoke checks pass.</li>
+</ul>
+</body>
+</html>

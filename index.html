@@ -1,136 +1,49 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Anish Thite - Home</title>
-
-    <!-- Styles -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'adlam': ['ADLaM Display', 'system-ui', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
- 
-    <!-- Analytics -->
-    <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init hi Er $r ui br Sr capture Ri calculateEventProperties Tr register register_once register_for_session unregister unregister_for_session Or getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Rr Pr createPersonProfile Cr mr Fr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing kr debug L Ir getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_lwrp8rJxreMnGicmxPIe8YksCzEnpjdZJKTG5Tn3Nps', {
-            api_host: 'https://us.i.posthog.com',
-            defaults: '2025-05-24',
-            person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
-        })
-    </script> 
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anish Thite</title>
+  <link rel="icon" href="data:,">
+  <link href="css/paper.css" rel="stylesheet" type="text/css">
+  <style>
+    .home-main { padding: 52px 0 92px; }
+    .home-hero { border-bottom: 1px solid var(--ink); padding-bottom: 34px; }
+    .home-hero p { max-width: 720px; color: var(--muted) !important; font-size: clamp(1.1rem, 2vw, 1.35rem); }
+    .home-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .home-links a { border: 1px solid var(--rule); padding: 7px 12px; text-decoration: none !important; }
+    .home-links a:first-child { border-color: var(--ink); background: rgba(33,22,13,.08); }
+    .home-note { color: var(--muted) !important; margin-top: 24px; }
+  </style>
 </head>
-
 <body id="page-top" class="bg-stone-50 text-stone-900 font-sans">
-    <!-- Navigation -->
-    <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <button type="button" class="md:hidden text-white" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="text-stone-100 text-xl font-semibold font-adlam" href="#page-top">Anish Thite</a>
-                
-                <div class="hidden md:block" id="bs-example-navbar-collapse-1">
-                    <ul class="flex space-x-6">
-                        <li>
-                            <a href="about.html" class="text-stone-100 hover:text-stone-300 hover:underline transition-colors font-adlam">About</a>
-                        </li> 
-                        <li>
-                            <a href="about.html#portfolio" class="text-stone-100 hover:text-stone-300 hover:underline transition-colors font-adlam">CV</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <button type="button" class="md:hidden text-white"><span class="sr-only">Toggle navigation</span> Menu</button>
+        <a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top">Anish Thite</a>
+        <div class="hidden md:block" id="bs-example-navbar-collapse-1">
+          <ul class="flex space-x-6">
+            <li><a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors">About</a></li>
+            <li><a href="projects.html" class="text-stone-100 hover:text-stone-300 transition-colors">Projects</a></li>
+          </ul>
         </div>
-    </nav>
-
-    <!-- Posts Section -->
-    <header class="pt-20">
-        <div id="posts" class="container mx-auto px-4">
-            <div class="text-center py-12">
-                <h1 class="text-4xl font-bold mb-8 text-stone-900 font-adlam">A Niche Thought</h1>
-                
-                <div class="max-w-2xl mx-auto">
-
-
-
-                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
-                        <a href="./essays/post.html?md=books" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
-                            on Books
-                        </a> 
-                        <span class="text-stone-500 ml-4">10/04/2025</span>
-                    </div>
-
-                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
-                        <a href="./essays/post.html?md=questions" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
-                            on Questions
-                        </a> 
-                        <span class="text-stone-500 ml-4">10/02/2025</span>
-                    </div>
-
-
-                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
-                        <a href="./essays/post.html?md=emo-runway" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
-                            on Emotional Runway
-                        </a> 
-                        <span class="text-stone-500 ml-4">10/01/2025</span>
-                    </div>
-
-                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
-                        <a href="./essays/post.html?md=soul" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
-                            on Soul
-                        </a> 
-                        <span class="text-stone-500 ml-4">09/20/2025</span>
-                    </div>
-
-                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
-                        <a href="./essays/post.html?md=startups" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
-                            on Founders
-                        </a> 
-                        <span class="text-stone-500 ml-4">09/08/2025</span>
-                    </div>
-                    
-
-                    <!-- <div class="text-xl leading-relaxed flex justify-between items-center py-2">
-                        <a href="./essays/pg.html" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
-                           on Paul Graham
-                        </a> 
-                        <span class="text-stone-500 ml-4">09/01/2025</span>
-                    </div> -->
-                    <div class="text-xl leading-relaxed flex justify-between items-center py-2">
-                        <a href="./essays/ailight.html" class="text-stone-700 hover:text-stone-900 hover:underline decoration-stone-400 hover:decoration-stone-600 transition-colors">
-                            on AiLight
-                        </a> 
-                        <span class="text-stone-500 ml-4">05/06/2020</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="py-32"></div>
-    <div class="hidden">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
+      </div>
     </div>
-</body>
+  </nav>
 
+  <main class="home-main container mx-auto px-4">
+    <section class="home-hero">
+      <h1>Anish Thite</h1>
+      <p>I build small tools, agent workflows, interactive explanations, and playful systems where AI meets real interfaces.</p>
+      <div class="home-links" aria-label="Primary links">
+        <a href="projects.html">See projects</a>
+        <a href="about.html">About + CV</a>
+        <a href="https://github.com/anishthite">GitHub</a>
+      </div>
+    </section>
+    <p class="home-note">Posts are hidden for now while the site turns back into a projects-first portfolio.</p>
+  </main>
+</body>
 </html>

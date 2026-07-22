@@ -1,145 +1,99 @@
+<!doctype html>
 <html lang="en">
-
 <head>
-   
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Anish Thite - About</title>
-
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'adlam': ['ADLaM Display', 'system-ui', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-<script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init hi Er $r ui br Sr capture Ri calculateEventProperties Tr register register_once register_for_session unregister unregister_for_session Or getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Rr Pr createPersonProfile Cr mr Fr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing kr debug L Ir getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_lwrp8rJxreMnGicmxPIe8YksCzEnpjdZJKTG5Tn3Nps', {
-        api_host: 'https://us.i.posthog.com',
-        defaults: '2025-05-24',
-        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
-    })
-</script>
- 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107351096-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)};
-  gtag('js', new Date());
-
-  gtag('config', 'UA-107351096-1');
-</script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anish Thite - About</title>
+  <link rel="icon" href="data:,">
+  <link href="css/paper.css" rel="stylesheet" type="text/css">
+  <style>
+    body.about-page { --measure: 980px; }
+    .about-main { padding: 42px 0 72px; }
+    .about-hero { max-width: 760px; padding-bottom: 34px; }
+    .link-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .link-stack a, .cv-card a { border: 1px solid var(--rule); padding: 5px 9px; text-decoration: none !important; }
+    .about-kicker, .about-meta { color: var(--muted); font-size: .9rem; }
+    .about-lede { color: var(--muted) !important; font-size: clamp(1.1rem, 2vw, 1.34rem); max-width: 720px !important; }
+    .about-section { border-top: 1px solid var(--rule); padding: 28px 0; }
+    .thread-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .thread-card, .cv-card { border: 1px solid var(--rule); padding: 14px; background: rgba(255,255,255,.16); }
+    .about-list { columns: 2; column-gap: 34px; padding-left: 1.1rem !important; }
+    .cv-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center; }
+    #portfolio { position: relative; top: -20px; }
+    @media (max-width: 760px) {
+      .about-hero, .thread-grid, .cv-card { grid-template-columns: 1fr; }
+      .about-photo img { width: min(230px, 70vw); }
+      .about-list { columns: 1; }
+    }
+  </style>
 </head>
-
-<body id="page-top" class="bg-stone-50 text-stone-900 font-sans">
-
-    
-    <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
-        <div class="container mx-auto px-4">
-            
-            <div class="flex justify-between items-center py-4">
-                <button type="button" class="md:hidden text-white" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top">Anish Thite</a>
-                
-                
-                <div class="hidden md:block" id="bs-example-navbar-collapse-1">
-                    <ul class="flex space-x-6">
-                        <li>
-                            <a href="#about" class="text-stone-100 hover:text-stone-300 transition-colors">About</a>
-                        </li> 
-                        <li>
-                            <a href="#portfolio" class="text-stone-100 hover:text-stone-300 transition-colors">CV</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<body id="page-top" class="about-page bg-stone-50 text-stone-900 font-sans">
+  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <button type="button" class="md:hidden text-white"><span class="sr-only">Toggle navigation</span> Menu</button>
+        <a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top">Anish Thite</a>
+        <div class="hidden md:block" id="bs-example-navbar-collapse-1">
+          <ul class="flex space-x-6">
+            <li><a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors">About</a></li>
+            <li><a href="projects.html" class="text-stone-100 hover:text-stone-300 transition-colors">Projects</a></li>
+          </ul>
         </div>
-    </nav>
-
-    <section class="pt-20">
-        <div class="container mx-auto px-4">
-            <div class="w-full">
-                <div id="about" class="text-center py-12">
-                    <h2 class="text-3xl font-bold text-stone-900 font-adlam">About</h2>
-                </div>
-                
-                <div class="flex flex-col lg:flex-row gap-8 items-start">
-                    
-                    <div class="flex-shrink-0">
-                        <img class="w-full max-w-xs mx-auto lg:mx-0" src="img/anishsmallnorm.png" alt="">
-                        <div class="flex justify-center lg:justify-start gap-4 text-2xl mt-6 ml-0 lg:ml-10">
-                            <a href="https://github.com/anishthite" class="text-stone-600 hover:text-stone-800 transition-colors">
-                                <i class="fa fa-fw fa-github"></i>
-                            </a>
-                            <a href="https://twitter.com/thiteanish" class="text-stone-600 hover:text-stone-800 transition-colors">
-                                <i class="fa fa-fw fa-twitter"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/anishthite/" class="text-stone-600 hover:text-stone-800 transition-colors">
-                                <i class="fa fa-fw fa-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="flex-1">     
-                        <div class="max-w-2xl text-base lg:text-lg leading-relaxed">
-                            <p class="text-left mb-6 text-stone-800"> Hello there. I'm a Computer Science student at Georgia Tech, with a concentration in the Intelligence and Devices threads (Rogue AIs are more fun when they can control hardware). I'm interested in NLP (especially transformer architectures), reinforcement learning, and robotics. </p> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-base lg:text-lg leading-relaxed mx-auto max-w-4xl mt-8">
-                    <p class="text-left mb-6 text-stone-800"> I am currently working in the NLP and Computational Social Science Lab. In addition, I work in the Automated Algorithm Design Vertically Integrated Project group to optimize algorithms using genetic programming. I'm also a Student Assistant for the Career Services department of the Office of Outreach, Enrollment, and Community in the College of Computing. I have previously worked in the  <a href="http://comparch.gatech.edu/hparch/" class="text-stone-700 hover:text-stone-900 underline decoration-stone-400 hover:decoration-stone-600 transition-colors"> Georgia Tech High-Performace Architecture Lab </a> to adapt conversational and speech-to-text models on IoT devices and robots. </p> 
-                    <p class="text-left text-stone-800"> I'm the Executive Officer for <a href="http://gtagency.github.io" class="text-stone-700 hover:text-stone-900 underline decoration-stone-400 hover:decoration-stone-600 transition-colors"> The Agency </a>, Georgia Tech's AI club, where I'm working on a project in natural language generation and helping people learn more about the field. Other interests include <strike>losing all my money</strike> algo-trading, road cycling, and helping find the <a href="https://hitchhikers.fandom.com/wiki/Earth" class="text-stone-700 hover:text-stone-900 underline decoration-stone-400 hover:decoration-stone-600 transition-colors">Ultimate Question of Life, the Universe and Everything </a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    
-    
-    <section id="portfolio" class="py-16 bg-stone-100">
-        <div class="container mx-auto px-4">   
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-stone-900 font-adlam">Resume</h2>
-            </div>
-            <div class="w-full h-screen bg-white rounded-lg shadow-sm border border-stone-200 p-4">
-               <embed src="Anish_Thite_Resume.pdf" type="application/pdf" width="100%" height="800px" />
-            </div>
-        </div>
-    </section>
- 
-    
-    <footer class="text-center py-8 bg-stone-200 border-t border-stone-300">
-        <div class="container mx-auto px-4">
-            <div class="text-sm text-stone-600">
-                Copyright Anish Thite; 2020
-            </div>
-        </div>
-    </footer>
-
-    
-    <div class="hidden">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
+      </div>
     </div>
-</body>
+  </nav>
 
+  <main id="about" class="about-main container mx-auto px-4">
+    <section class="about-hero">
+      <p class="about-kicker">About</p>
+      <h1>Anish Thite</h1>
+      <p class="about-lede">I build small tools, agent workflows, interactive explainers, and AI-adjacent toys. The common thread is making complicated systems feel usable enough to play with.</p>
+      <p>I am currently in SF, building around <a href="https://playscape.gg">playscape.gg</a> and making a lot of public experiments: shipping trackers, agent tooling, ambient web toys, simulations, and this portfolio cleanup.</p>
+      <div class="link-stack" aria-label="Profile links">
+        <a href="https://github.com/anishthite">GitHub</a>
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=HYCsOdoAAAAJ">Scholar</a>
+        <a href="https://linkedin.com/in/anishthite/">LinkedIn</a>
+        <a href="https://twitter.com/anishthite">X</a>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="threads-heading">
+      <h2 id="threads-heading">What I am doing now</h2>
+      <div class="thread-grid">
+        <article class="thread-card"><h3>Agent tools</h3><p>Configs, workflows, and tiny utilities for coding agents and AI-assisted building.</p></article>
+        <article class="thread-card"><h3>Playful software</h3><p>Small web apps, games, simulations, and social/product experiments that are quick to try.</p></article>
+        <article class="thread-card"><h3>Explainable artifacts</h3><p>Interactive pages that make technical ideas easier to understand without hiding the details.</p></article>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="research-heading">
+      <h2 id="research-heading">Research background</h2>
+      <p>Before the current tool-and-product phase, I worked around language models, evaluation, datasets, and evolutionary AutoML. Public research pages list work connected to EleutherAI's <em>The Pile</em> and <em>lm-evaluation-harness</em>, plus Georgia Tech / GTRI work on genetic programming, neural architecture search, and evolved SimGANs for ECG classification.</p>
+      <ul class="about-list">
+        <li>Language model datasets and evaluation</li>
+        <li>Few-shot language model evaluation</li>
+        <li>Evolutionary AutoML and genetic programming</li>
+        <li>Robotics, devices, and applied ML systems</li>
+      </ul>
+    </section>
+
+    <section class="about-section" aria-labelledby="working-style-heading">
+      <h2 id="working-style-heading">Taste</h2>
+      <p>I like prototypes that teach you something quickly: one clear interaction, a weird edge case made visible, a system you can poke at, or a tool that makes shipping feel less abstract.</p>
+    </section>
+
+    <section id="cv" class="about-section" aria-labelledby="cv-heading">
+      <span id="portfolio" aria-hidden="true"></span>
+      <h2 id="cv-heading">CV</h2>
+      <div class="cv-card">
+        <div>
+          <h3>Formal version</h3>
+          <p class="about-meta">For the traditional resume view, open the PDF. Keeping it as a click-through makes this page readable.</p>
+        </div>
+        <a href="Anish_Thite_Resume.pdf">Read CV PDF</a>
+      </div>
+    </section>
+  </main>
+</body>
 </html>
