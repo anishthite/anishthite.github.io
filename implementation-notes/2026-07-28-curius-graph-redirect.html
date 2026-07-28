@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spec - Curius graph redirect</title>
+<meta name="task" content="Add /curius-graph redirect route">
+<meta name="date-started" content="2026-07-28">
+<meta name="date-updated" content="2026-07-28">
+<meta name="status" content="ready-for-review">
+<meta name="blast-radius" content="low">
+<meta name="tags" content="redirect,curius,github-pages">
+<style>
+body{font:14px/1.45 -apple-system,system-ui,sans-serif;max-width:880px;margin:1.5rem auto;padding:0 1rem;color:#111}h1{font-size:20px;margin:0 0 .25rem}h2{font-size:15px;margin:1.4rem 0 .4rem;border-bottom:1px solid #ddd;padding-bottom:.2rem}table{border-collapse:collapse;width:100%;margin:.4rem 0 .8rem}th,td{border:1px solid #ddd;padding:4px 8px;text-align:left;vertical-align:top}th{background:#f6f6f6;font-weight:600}code{background:#f1f1f1;padding:1px 4px;border-radius:3px;font-size:12.5px}.blast-low{color:#2a7a2a}.meta{color:#555;font-size:12.5px;margin-bottom:.8rem}.kv{display:grid;grid-template-columns:140px 1fr;gap:2px 14px;font-size:13px;margin:.4rem 0 1rem}.kv b{color:#444;font-weight:600}ul{margin:.3rem 0 .8rem 1.2rem;padding:0}
+</style>
+</head>
+<body>
+<h1>Curius graph redirect</h1>
+<p class="meta"><code>curius-graph-redirect-posthog</code> · worktree <code>.context/repos/anishthite.github.io</code> · 2026-07-28 · status <b>ready-for-review</b> · blast <span class="blast-low">low</span></p>
+<h2>Summary</h2>
+<div class="kv">
+  <b>Goal</b><div><code>https://anish.thite.site/curius-graph</code> reaches <code>https://curius-graph.thite.site/</code>.</div>
+  <b>Host</b><div><code>anish.thite.site</code> is this repo's custom domain.</div>
+  <b>Mechanism</b><div>Folder route with canonical link, meta refresh, JS replace, and fallback link.</div>
+  <b>Open Qs</b><div>0.</div>
+</div>
+<h2>Files</h2>
+<table>
+<tr><th>Path</th><th>Kind</th><th>Delta</th></tr>
+<tr><td><code>curius-graph/index.html</code></td><td>new</td><td>Add static redirect page.</td></tr>
+</table>
+<h2>Decisions</h2>
+<table>
+<tr><th>ID</th><th>Choice · Rationale</th></tr>
+<tr><td>D-001</td><td>Use <code>curius-graph.thite.site</code> as the target. It already serves the current graph app.</td></tr>
+</table>
+<h2>Reversibility</h2>
+<p>R-001 · <span class="blast-low">low</span>. Delete <code>curius-graph/index.html</code>.</p>
+<h2>Definition of done</h2>
+<ul>
+  <li><code>curius-graph/index.html</code> contains canonical, meta refresh, JS replace, and fallback link.</li>
+</ul>
+</body>
+</html>
