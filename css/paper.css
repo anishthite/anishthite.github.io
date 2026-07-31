@@ -21,11 +21,14 @@
   font-display: swap;
 }
 :root {
-  --paper: #fbf4e6;
+  --paper: #f7f2e8;
   --ink: #21160d;
-  --muted: #746756;
-  --rule: #ddcfb8;
-  --soft: #f1e5d2;
+  --muted: #6f6559;
+  --rule: #d8c8ad;
+  --soft: #efe3d2;
+  --accent: #7f3f2d;
+  --accent-2: #285f61;
+  --accent-3: #6b6f44;
   --measure: 880px;
   --serif: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
@@ -36,7 +39,9 @@ body {
   margin: 0 !important;
   color: var(--ink) !important;
   background:
-    linear-gradient(90deg, rgba(108, 74, 36, .035) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(135deg, rgba(40, 95, 97, .06), transparent 34%),
+    linear-gradient(315deg, rgba(127, 63, 45, .055), transparent 40%),
+    linear-gradient(90deg, rgba(108, 74, 36, .028) 1px, transparent 1px) 0 0 / 28px 28px,
     var(--paper) !important;
   font-family: var(--serif) !important;
   font-size: 18px;
@@ -103,6 +108,19 @@ body, button, input, select, textarea, code, pre, kbd, samp, .font-sans, .font-a
   font-weight: 700 !important;
 }
 #mainNav a:hover { text-decoration: underline !important; text-underline-offset: 3px; }
+#mainNav a[aria-current="page"] {
+  color: var(--accent) !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--accent) !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 4px;
+}
+::selection {
+  background: rgba(40, 95, 97, .18);
+}
 
 header, section { background: transparent !important; }
 .pt-20, .pt-16, .pt-12 { padding-top: 0 !important; }
@@ -112,13 +130,13 @@ header, section { background: transparent !important; }
 
 h1, h2, h3 {
   color: var(--ink) !important;
-  letter-spacing: -.02em;
+  letter-spacing: 0;
   line-height: 1.02;
   margin: 0 0 14px !important;
   font-weight: 400 !important;
 }
-h1, .text-4xl { font-size: clamp(2.6rem, 9vw, 5.2rem) !important; max-width: 12ch; }
-h2, .text-3xl { font-size: clamp(1.65rem, 5vw, 2.4rem) !important; }
+h1, .text-4xl { font-size: 5.2rem !important; max-width: 12ch; }
+h2, .text-3xl { font-size: 2.4rem !important; }
 h3, .text-xl { font-size: 1.2rem !important; }
 p { margin: 0 0 1rem; color: var(--ink) !important; }
 
@@ -130,6 +148,24 @@ a {
   text-underline-offset: 3px !important;
 }
 a:hover { text-decoration-color: var(--ink) !important; }
+.text-link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.text-link-list a {
+  background: rgba(40, 95, 97, .08) !important;
+  border: 1px solid transparent;
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 4px 10px;
+  text-decoration: none !important;
+}
+.text-link-list a:hover {
+  border-color: rgba(40, 95, 97, .32);
+}
 
 #posts .max-w-2xl,
 .post-list {
@@ -207,8 +243,8 @@ embed { display: block; width: 100%; height: 100% !important; }
   padding: 0 !important;
   margin-top: 2rem !important;
 }
-#include h1 { font-size: clamp(2rem, 9vw, 3rem) !important; max-width: 16ch; }
-#include h2 { font-size: clamp(1.45rem, 5vw, 2rem) !important; }
+#include h1 { font-size: 3rem !important; max-width: 16ch; }
+#include h2 { font-size: 2rem !important; }
 #include ul, #include ol { padding-left: 1.4rem !important; margin: 0 0 1rem !important; }
 #include img { display: block; margin: 1.5rem 0; }
 #include figure { margin: 1.5rem 0; }
@@ -258,7 +294,10 @@ footer {
     gap: 10px 16px !important;
   }
   #mainNav a { min-height: 36px; display: inline-flex; align-items: center; }
-  h1, .text-4xl { font-size: clamp(2.2rem, 14vw, 3.7rem) !important; }
+  h1, .text-4xl { font-size: 3.7rem !important; }
+  h2, .text-3xl { font-size: 2rem !important; }
+  #include h1 { font-size: 2.5rem !important; }
+  #include h2 { font-size: 1.75rem !important; }
   #posts .max-w-2xl > div,
   .post-row { grid-template-columns: 1fr !important; gap: 2px !important; }
   #posts span, #page-date, .date { white-space: normal; }
@@ -280,13 +319,13 @@ footer {
 .cv-card a,
 .view-tabs button {
   border-color: transparent !important;
-  background: rgba(33, 22, 13, .045) !important;
+  background: rgba(40, 95, 97, .08) !important;
 }
 
 .home-links a:first-child,
 .view-tabs button[aria-pressed="true"] {
   border-color: transparent !important;
-  background: rgba(33, 22, 13, .09) !important;
+  background: rgba(127, 63, 45, .11) !important;
 }
 
 .thread-card,
@@ -294,7 +333,7 @@ footer {
 .system-card,
 .cv-card {
   border: 0 !important;
-  background: rgba(255, 255, 255, .12) !important;
+  background: rgba(255, 255, 255, .34) !important;
 }
 
 .about-section,

@@ -1,28 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Anish Thite</title>
+  <meta name="description" content="Anish Thite builds small tools, agent workflows, interactive explainers, and AI-adjacent web experiments.">
   <link rel="icon" href="data:,">
   <link href="css/paper.css" rel="stylesheet" type="text/css">
   <style>
-    .home-main { padding: 52px 0 92px; }
-    .home-hero { border-bottom: 1px solid var(--ink); padding-bottom: 34px; }
-    .home-hero p { max-width: 720px; color: var(--muted) !important; font-size: clamp(1.1rem, 2vw, 1.35rem); }
+    body.home-page { --measure: 1080px; }
+    .home-main { padding: 46px 0 84px; }
+    .home-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, .92fr);
+      gap: 38px;
+      align-items: end;
+      padding-bottom: 34px;
+    }
+    .home-kicker, .home-meta { color: var(--muted) !important; font-size: .94rem; margin-bottom: 8px; }
+    .home-hero p { max-width: 700px; color: var(--muted) !important; font-size: 1.3rem; }
     .home-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
     .home-links a { border: 1px solid var(--rule); padding: 7px 12px; text-decoration: none !important; }
-    .home-links a:first-child { border-color: var(--ink); background: rgba(33,22,13,.08); }
-    .home-note { color: var(--muted) !important; margin-top: 24px; }
+    .home-board {
+      border-top: 2px solid var(--ink);
+      padding-top: 12px;
+    }
+    .home-board a {
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(33, 22, 13, .18);
+      text-decoration: none !important;
+    }
+    .home-board a:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .home-board h2 { font-size: 1.18rem !important; margin: 0 0 3px !important; line-height: 1.12; }
+    .home-board p { font-size: .98rem; line-height: 1.32; margin: 0; color: var(--muted) !important; }
+    .home-board .tag { color: var(--accent-2); font-size: .9rem; }
+    .home-sections {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 28px;
+      border-top: 1px solid rgba(33, 22, 13, .18);
+      margin-top: 18px;
+      padding-top: 28px;
+    }
+    .home-section h2 { font-size: 1.9rem !important; }
+    .home-list { list-style: none; padding: 0 !important; margin: 0; }
+    .home-list li { max-width: none; padding: 9px 0; border-bottom: 1px solid rgba(33, 22, 13, .14); }
+    .home-list a { text-decoration: none !important; }
+    .home-list span { color: var(--muted); display: block; font-size: .92rem; }
+    @media (max-width: 760px) {
+      .home-hero, .home-sections { grid-template-columns: 1fr; }
+      .home-board a { grid-template-columns: 72px minmax(0, 1fr); }
+      .home-hero p { font-size: 1.12rem; }
+      .home-section h2 { font-size: 1.65rem !important; }
+    }
   </style>
 </head>
-<body id="page-top" class="bg-stone-50 text-stone-900 font-sans">
-  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+<body id="page-top" class="home-page bg-stone-50 text-stone-900 font-sans">
+  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg" aria-label="Site">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
-        <button type="button" class="md:hidden text-white"><span class="sr-only">Toggle navigation</span> Menu</button>
-        <a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top">Anish Thite</a>
+        <a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top" aria-current="page">Anish Thite</a>
         <div class="hidden md:block" id="bs-example-navbar-collapse-1">
           <ul class="flex space-x-6">
             <li><a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors">About</a></li>
@@ -35,15 +76,54 @@
 
   <main class="home-main container mx-auto px-4">
     <section class="home-hero">
-      <h1>Anish Thite</h1>
-      <p>I build small tools, agent workflows, interactive explanations, and playful systems where AI meets real interfaces.</p>
-      <div class="home-links" aria-label="Primary links">
-        <a href="projects.html">See projects</a>
-        <a href="about.html">About</a>
-        <a href="https://github.com/anishthite">GitHub</a>
+      <div>
+        <p class="home-kicker">San Francisco - tools, agents, explainers</p>
+        <h1>Anish Thite</h1>
+        <p>I build small software with a clear interaction: agent workflows, AI-adjacent toys, interactive explanations, and tools that make shipping feel concrete.</p>
+        <nav class="home-links" aria-label="Primary links">
+          <a href="projects.html">See projects</a>
+          <a href="about.html">About</a>
+          <a href="https://github.com/anishthite">GitHub</a>
+          <a href="mailto:anishthite@gmail.com">Email</a>
+        </nav>
+      </div>
+
+      <aside class="home-board" aria-label="Featured work">
+        <p class="home-meta">Featured work</p>
+        <a href="https://github.com/anishthite/agent-dotfiles">
+          <span class="tag">Agents</span>
+          <div><h2>Agent tools / dotfiles</h2><p>Versioned configs and workflows for coding agents.</p></div>
+        </a>
+        <a href="fish-biomechanics-interactive-textbook-technical.html">
+          <span class="tag">Explainer</span>
+          <div><h2>Fish biomechanics</h2><p>Interactive technical notes on swimming mechanics.</p></div>
+        </a>
+        <a href="essays/ailight.html">
+          <span class="tag">NLP app</span>
+          <div><h2>AiLight</h2><p>PDF highlights that keep summaries attached to context.</p></div>
+        </a>
+      </aside>
+    </section>
+
+    <section class="home-sections" aria-label="Current work and links">
+      <div class="home-section">
+        <h2>Current threads</h2>
+        <ul class="home-list">
+          <li>Agent tooling and workflow ergonomics <span>Configs, prompts, commands, review loops.</span></li>
+          <li>Small web systems that are quick to try <span>Ambient tools, games, simulations, status pages.</span></li>
+          <li>Technical artifacts that explain themselves <span>Interactive pages, research notes, concrete demos.</span></li>
+        </ul>
+      </div>
+      <div class="home-section">
+        <h2>Elsewhere</h2>
+        <nav class="text-link-list" aria-label="Profile links">
+          <a href="https://github.com/anishthite">GitHub</a>
+          <a href="https://scholar.google.com/citations?hl=en&amp;user=HYCsOdoAAAAJ">Scholar</a>
+          <a href="https://linkedin.com/in/anishthite/">LinkedIn</a>
+          <a href="https://twitter.com/anishthite">X</a>
+        </nav>
       </div>
     </section>
-    <p class="home-note">Posts are hidden for now while the site turns back into a projects-first portfolio.</p>
   </main>
 </body>
 </html>
