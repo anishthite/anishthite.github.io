@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Anish Thite - About</title>
+  <meta name="description" content="About Anish Thite: software builder working on agent tools, playful software, interactive explainers, and AI-adjacent systems.">
   <link rel="icon" href="data:,">
   <link href="css/paper.css" rel="stylesheet" type="text/css">
   <style>
@@ -13,11 +14,11 @@
     .about-hero { max-width: 760px; padding-bottom: 34px; }
     .link-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
     .link-stack a { border: 1px solid var(--rule); padding: 5px 9px; text-decoration: none !important; }
-    .about-kicker, .about-meta { color: var(--muted); font-size: .9rem; }
-    .about-lede { color: var(--muted) !important; font-size: clamp(1.1rem, 2vw, 1.34rem); max-width: 720px !important; }
+    .about-kicker, .about-meta { color: var(--accent); font-size: .9rem; text-transform: uppercase; }
+    .about-lede { color: var(--muted) !important; font-size: 1.28rem; max-width: 720px !important; }
     .about-section { border-top: 1px solid var(--rule); padding: 28px 0; }
     .thread-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .thread-card, .cv-panel, .cv-entry { border: 1px solid var(--rule); padding: 14px; background: rgba(255,255,255,.16); }
+    .thread-card, .cv-panel, .cv-entry { border: 1px solid var(--rule); padding: 14px; background: transparent; }
     .about-list { columns: 2; column-gap: 34px; padding-left: 1.1rem !important; }
     .cv-contact { color: var(--muted) !important; }
     .cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
@@ -31,18 +32,18 @@
       .about-hero, .thread-grid, .cv-grid { grid-template-columns: 1fr; }
       .about-photo img { width: min(230px, 70vw); }
       .about-list { columns: 1; }
+      .about-lede { font-size: 1.12rem; }
     }
   </style>
 </head>
 <body id="page-top" class="about-page bg-stone-50 text-stone-900 font-sans">
-  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg" aria-label="Site">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
-        <button type="button" class="md:hidden text-white"><span class="sr-only">Toggle navigation</span> Menu</button>
         <a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top">Anish Thite</a>
         <div class="hidden md:block" id="bs-example-navbar-collapse-1">
           <ul class="flex space-x-6">
-            <li><a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors">About</a></li>
+            <li><a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors" aria-current="page">About</a></li>
             <li><a href="projects.html" class="text-stone-100 hover:text-stone-300 transition-colors">Projects</a></li>
           </ul>
         </div>
@@ -56,12 +57,12 @@
       <h1>Anish Thite</h1>
       <p class="about-lede">I build small tools, agent workflows, interactive explainers, and AI-adjacent toys. The common thread is making complicated systems feel usable enough to play with.</p>
       <p>I am currently in SF, building around <a href="https://playscape.gg">playscape.gg</a> and making a lot of public experiments: shipping trackers, agent tooling, ambient web toys, simulations, and this portfolio cleanup.</p>
-      <div class="link-stack" aria-label="Profile links">
+      <nav class="link-stack" aria-label="Profile links">
         <a href="https://github.com/anishthite">GitHub</a>
         <a href="https://scholar.google.com/citations?hl=en&amp;user=HYCsOdoAAAAJ">Scholar</a>
         <a href="https://linkedin.com/in/anishthite/">LinkedIn</a>
         <a href="https://twitter.com/anishthite">X</a>
-      </div>
+      </nav>
     </section>
 
     <section class="about-section" aria-labelledby="threads-heading">

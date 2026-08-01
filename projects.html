@@ -1,52 +1,162 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Anish Thite - Projects</title>
+  <meta name="description" content="Projects by Anish Thite: agent tools, AI experiments, research work, explainers, web toys, and small shipping utilities.">
   <link rel="icon" href="data:,">
   <link href="css/paper.css" rel="stylesheet" type="text/css">
   <style>
     body.projects-page { --measure: 1120px; }
     .projects-page main { padding: 50px 0 72px; }
-    .projects-page h1 { max-width: 13ch; margin-bottom: 30px !important; }
+    .projects-page h1 { max-width: 13ch; margin-bottom: 12px !important; }
     .projects-page h2, .projects-page p, .projects-page li { max-width: none; }
-    .projects-hero { border-bottom: 1px solid var(--ink); margin-bottom: 18px; }
-    .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-    .project-card {
-      color: var(--ink) !important;
+    .projects-hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+    }
+    .projects-hero p { color: var(--muted) !important; font-size: 1.1rem; }
+    .projects-controls {
       display: flex;
       flex-direction: column;
-      min-height: 430px;
+      align-items: flex-end;
+      gap: 10px;
+      min-width: min(100%, 420px);
+    }
+    .project-tabs,
+    .project-view-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .project-tabs button,
+    .project-view-tabs button {
+      appearance: none;
+      border: 1.5px solid var(--ink);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      min-height: 36px;
+      padding: 5px 10px;
+    }
+    .project-tabs button:hover,
+    .project-view-tabs button:hover { border-color: var(--accent); color: var(--accent); }
+    .project-tabs button[aria-pressed="true"],
+    .project-view-tabs button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: rgba(139, 0, 0, .055); }
+    .project-count { color: var(--muted) !important; margin: 0 0 18px !important; font-size: .95rem; }
+    .projects-grid[hidden], .projects-timeline[hidden] { display: none !important; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    project-card { display: block; min-height: 100%; }
+    .project-card {
+      color: var(--ink) !important;
+      display: flex !important;
+      flex-direction: column;
+      min-height: 100% !important;
       border: 1px solid var(--rule);
-      background: rgba(255,255,255,.18);
+      background: transparent;
       overflow: hidden;
       text-decoration: none !important;
     }
-    .project-card:hover { border-color: var(--ink); background: rgba(255,255,255,.34); text-decoration: none !important; }
+    .project-card:hover { border-color: var(--accent); background: transparent; text-decoration: none !important; }
     .project-card *, .project-card:hover * { text-decoration: none !important; }
     .project-image { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--rule); background: var(--soft); }
     .project-body { display: flex; flex: 1; flex-direction: column; justify-content: space-between; padding: 17px; }
-    .project-title { font-size: clamp(1.35rem, 2.4vw, 2rem) !important; margin: 0 0 12px !important; max-width: 13ch; }
+    .project-title { font-size: 1.55rem !important; margin: 0 0 12px !important; max-width: 17ch; }
     .project-summary { font-size: 1.04rem; line-height: 1.42; margin-bottom: 18px !important; }
     .project-time { color: var(--muted) !important; font-size: .94rem; margin: 0 0 18px !important; }
     .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 22px; }
     .project-tags span { border: 1px solid var(--rule); color: var(--muted); font-size: .84rem; padding: 2px 7px; }
+    .projects-timeline {
+      border-top: 1px solid var(--rule);
+    }
+    .timeline-year {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 22px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .timeline-year h2 {
+      color: var(--accent) !important;
+      font-size: 1.75rem !important;
+      line-height: 1;
+      margin: 0 !important;
+    }
+    .timeline-items {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      padding-left: 20px;
+      border-left: 1px solid var(--rule);
+    }
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px 22px;
+      align-items: baseline;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -25px;
+      top: .48rem;
+      width: 9px;
+      height: 9px;
+      border: 1px solid var(--accent);
+      background: var(--paper);
+    }
+    .timeline-title {
+      display: inline;
+      font-size: 1.28rem;
+      line-height: 1.2;
+      text-decoration-thickness: 1px !important;
+    }
+    .timeline-summary {
+      color: var(--ink) !important;
+      font-size: .98rem;
+      line-height: 1.38;
+      margin: 5px 0 0 !important;
+    }
+    .timeline-meta {
+      color: var(--muted) !important;
+      font-size: .9rem;
+      margin: 0 !important;
+      white-space: nowrap;
+    }
     @media (max-width: 920px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 640px) { .projects-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) {
+      .projects-hero { display: block; }
+      .projects-controls { align-items: flex-start; margin-top: 16px; min-width: 0; }
+      .project-tabs, .project-view-tabs { justify-content: flex-start; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-title { font-size: 1.45rem !important; }
+      .timeline-year { grid-template-columns: 1fr; gap: 10px; padding: 20px 0; }
+      .timeline-items { gap: 18px; padding-left: 16px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 3px; }
+      .timeline-item::before { left: -21px; }
+      .timeline-meta { white-space: normal; }
+    }
   </style>
 </head>
 <body id="page-top" class="projects-page bg-stone-50 text-stone-900 font-sans">
-  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg">
+  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg" aria-label="Site">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
-        <button type="button" class="md:hidden text-white"><span class="sr-only">Toggle navigation</span> Menu</button>
         <a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top">Anish Thite</a>
         <div class="hidden md:block" id="bs-example-navbar-collapse-1">
           <ul class="flex space-x-6">
             <li><a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors">About</a></li>
-            <li><a href="projects.html" class="text-stone-100 hover:text-stone-300 transition-colors">Projects</a></li>
+            <li><a href="projects.html" class="text-stone-100 hover:text-stone-300 transition-colors" aria-current="page">Projects</a></li>
           </ul>
         </div>
       </div>
@@ -54,83 +164,10 @@
   </nav>
 
   <main class="container mx-auto px-4">
-    <header class="projects-hero">
-      <h1>Projects</h1>
-    </header>
-
-    <section id="projects-grid" class="projects-grid" aria-label="Projects"></section>
+    <projects-section></projects-section>
   </main>
 
-  <!-- Add a project here; the preview grid renders from this one list. -->
-  <script id="projects-data" type="application/json">
-[
-  {"title":"AiLight","period":"2020","type":"NLP app","url":"essays/ailight.html","summary":"Highlights key sentences inside PDFs so summaries stay attached to context.","tags":["NLP","documents","reading"],"visual":"PDF → highlights → context"},
-  {"title":"Language model evaluation work","period":"2020–2025","type":"Research","url":"https://scholar.google.com/citations?hl=en&user=HYCsOdoAAAAJ","summary":"Public research entries connected to The Pile and EleutherAI's language model evaluation harness.","tags":["language models","evaluation","datasets"],"visual":"benchmarks for language models"},
-  {"title":"AutoML / evolutionary search","period":"2019–2022","type":"Research","url":"https://scholar.google.com/citations?hl=en&user=HYCsOdoAAAAJ","summary":"Georgia Tech / GTRI work around genetic programming, neural architecture search, and evolved SimGANs.","tags":["AutoML","genetic programming","GTRI"],"visual":"evolve → test → select"},
-  {"title":"Commiter","period":"2026","type":"Web app","url":"https://github.com/anishthite/commiter","summary":"A website to track if you are shipping.","tags":["shipping","tools"],"visual":"ship streaks and momentum"},
-  {"title":"Agent tools / dotfiles","period":"2026","type":"Developer tooling","url":"https://github.com/anishthite/agent-dotfiles","summary":"Versioned config and skills for coding agents across Claude Code, Codex, pi, Gemini, and related workflows.","tags":["agents","tools","workflow"],"visual":"prompts, skills, configs"},
-  {"title":"Pacman Prompts","period":"2024","type":"Agent tooling","url":"https://github.com/anishthite/pacman-prompts","summary":"Prompting as code: a small repo for treating reusable prompts like buildable software.","tags":["prompts","python","agents"],"visual":"prompt files as code"},
-  {"title":"Pi Effort","period":"2026","type":"Pi extension","url":"https://github.com/anishthite/pi-effort","summary":"A slash command for quickly setting thinking effort in pi.","tags":["pi","typescript","agent UX"],"visual":"/effort low → high"},
-  {"title":"Work in a Cafe","period":"2026","type":"Web toy","url":"https://github.com/anishthite/workinacafe","summary":"A small ambient place for working in a cafe.","tags":["ambient","web","toy"],"visual":"tables, noise, focus"},
-  {"title":"Gaslight","period":"2026","type":"LLM toy","url":"https://github.com/anishthite/gaslight","summary":"A place for you to gaslight an LLM.","tags":["LLM","web toy"],"visual":"conversation pressure test"},
-  {"title":"Smash TV","period":"2026","type":"Video site","url":"https://github.com/anishthite/smash-tv","summary":"A retro TV channel that plays videos from an archive.org collection.","tags":["video","archive","retro"],"visual":"channel surfing archive video"},
-  {"title":"Color Lift","period":"2026","type":"Chrome extension","url":"https://github.com/anishthite/color-lift","summary":"A browser extension that lifts colors from a page to turn them into a theme.","tags":["extension","color","themes"],"visual":"sample → palette → theme"},
-  {"title":"Markdowny","period":"2026","type":"Desktop app","url":"https://github.com/anishthite/markdowny","summary":"A tiny desktop markdown reader.","tags":["desktop","markdown","typescript"],"visual":"local notes in a reader"},
-  {"title":"Minimal Clawbot","period":"2026","type":"Cloudflare bot","url":"https://github.com/anishthite/minimal-clawbot","summary":"A minimal clawbot that is easy to extend and runs on Cloudflare.","tags":["bot","cloudflare","minimal"],"visual":"small bot, small surface"},
-  {"title":"Sitebrew Uptime","period":"2026","type":"Status page","url":"https://github.com/anishthite/sitebrew-uptime","summary":"An uptime monitor and status page for Anish Thite, powered by Upptime.","tags":["uptime","status","ops"],"visual":"green checks over time"},
-  {"title":"Smash leaderboard analysis","period":"2026","type":"Data analysis","url":"https://github.com/anishthite/smash-leaderboard-analysis","summary":"Data analysis around Smash leaderboard results.","tags":["analysis","games","data"],"visual":"matches → ranks → plots"},
-  {"title":"Spanner downloads","period":"2026","type":"Release page","url":"https://github.com/anishthite/spanner-downloads","summary":"Public Makerspace desktop downloads.","tags":["desktop","downloads","makerspace"],"visual":"build artifacts for users"},
-  {"title":"Nervos Colors","period":"2026","type":"Terminal theme","url":"https://github.com/anishthite/nervos-colors","summary":"A terminal theme made with Claude.","tags":["terminal","theme","colors"],"visual":"soft terminal palette"},
-  {"title":"pls_draw","period":"2022","type":"Twitter bot","url":"https://github.com/anishthite/pls_draw","summary":"A Twitter reply bot that drew tweets using Craiyon.","tags":["bot","images","craiyon"],"visual":"tweet → prompt → image"},
-  {"title":"Fish biomechanics explainer","period":"2026","type":"Explainer","url":"fish-biomechanics-interactive-textbook-technical.html","summary":"Interactive technical explainer for swimming mechanics.","tags":["explainer","web","diagrams"],"visual":"forces over a moving fish"},
-  {"title":"Team 8370A robotics","period":"2019","type":"Robotics","url":"https://github.com/anishthite/team8370A","summary":"VEX Robotics Competition code and files for Team 8370A.","tags":["robotics","VRC","C"],"visual":"motors, sensors, autonomous"}
-]
-  </script>
-  <script>
-    const projects = JSON.parse(document.getElementById('projects-data').textContent);
-    const esc = value => String(value).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-    const palettes = [
-      ['#f3e3c8', '#21160d', '#9a6231'], ['#e8e0ce', '#21160d', '#6b6f44'], ['#efe7d8', '#21160d', '#9b4f3d'],
-      ['#eadfcb', '#21160d', '#5f6f82'], ['#f1e5d2', '#21160d', '#80613f'], ['#e7ddcf', '#21160d', '#7b574a']
-    ];
-    const wrap = (text, max) => {
-      const words = String(text).split(/\s+/), lines = [];
-      let line = '';
-      words.forEach(word => {
-        if ((line + ' ' + word).trim().length > max && line) { lines.push(line); line = word; }
-        else line = (line + ' ' + word).trim();
-      });
-      if (line) lines.push(line);
-      return lines.slice(0, 3);
-    };
-    const preview = (project, index) => {
-      const [bg, ink, accent] = palettes[index % palettes.length];
-      const visual = wrap(project.visual || project.tags.join(' · '), 32).map((line, i) => `<text x="38" y="${300 + i * 27}" font-size="22" fill="${accent}">${esc(line)}</text>`).join('');
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400">
-        <rect width="640" height="400" fill="${bg}"/>
-        <path d="M0 318 C150 250 270 380 420 300 S570 225 640 280" fill="none" stroke="${accent}" stroke-width="3" opacity=".42"/>
-        <path d="M70 60 H570 M70 340 H570" stroke="${ink}" opacity=".25"/>
-        <circle cx="510" cy="108" r="56" fill="${accent}" opacity=".14"/>
-        <circle cx="560" cy="150" r="20" fill="${accent}" opacity=".24"/>
-        <path d="M92 210 C190 135 260 250 350 175 S480 145 552 214" fill="none" stroke="${ink}" stroke-width="2" opacity=".28"/>
-        ${visual}
-      </svg>`;
-      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-    };
-
-    document.getElementById('projects-grid').innerHTML = projects.map((project, index) => `
-      <a class="project-card" href="${esc(project.url)}" aria-label="${esc(project.title)} project">
-        <img class="project-image" src="${preview(project, index)}" alt="">
-        <div class="project-body">
-          <div>
-            <h2 class="project-title">${esc(project.title)}</h2>
-            <p class="project-summary">${esc(project.summary)}</p>
-            <p class="project-time">${esc(project.period)} · ${esc(project.type)}</p>
-          </div>
-          <div class="project-tags">${project.tags.map(tag => `<span>${esc(tag)}</span>`).join('')}</div>
-        </div>
-      </a>
-    `).join('');
-  </script>
+  <script src="js/projects-data.js"></script>
+  <script src="js/projects.js"></script>
 </body>
 </html>
