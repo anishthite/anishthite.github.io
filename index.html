@@ -18,12 +18,12 @@
       align-items: end;
       padding-bottom: 34px;
     }
-    .home-kicker, .home-meta { color: var(--muted) !important; font-size: .94rem; margin-bottom: 8px; }
-    .home-hero p { max-width: 700px; color: var(--muted) !important; font-size: 1.3rem; }
+    .home-kicker, .home-meta { color: var(--accent) !important; font-size: .94rem; margin-bottom: 8px; text-transform: uppercase; }
+    .home-hero p { max-width: 700px; color: var(--soft-ink) !important; font-size: 1.3rem; }
     .home-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
     .home-links a { border: 1px solid var(--rule); padding: 7px 12px; text-decoration: none !important; }
     .home-board {
-      border-top: 2px solid var(--ink);
+      border-top: 1.5px solid var(--ink);
       padding-top: 12px;
     }
     .home-board a {
@@ -31,24 +31,24 @@
       grid-template-columns: 84px minmax(0, 1fr);
       gap: 14px;
       padding: 13px 0;
-      border-bottom: 1px solid rgba(33, 22, 13, .18);
+      border-bottom: 1px solid var(--rule);
       text-decoration: none !important;
     }
     .home-board a:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
     .home-board h2 { font-size: 1.18rem !important; margin: 0 0 3px !important; line-height: 1.12; }
     .home-board p { font-size: .98rem; line-height: 1.32; margin: 0; color: var(--muted) !important; }
-    .home-board .tag { color: var(--accent-2); font-size: .9rem; }
+    .home-board .tag { color: var(--accent); font-size: .9rem; }
     .home-sections {
       display: grid;
       grid-template-columns: 1.2fr .8fr;
       gap: 28px;
-      border-top: 1px solid rgba(33, 22, 13, .18);
+      border-top: 1px solid var(--rule);
       margin-top: 18px;
       padding-top: 28px;
     }
     .home-section h2 { font-size: 1.9rem !important; }
     .home-list { list-style: none; padding: 0 !important; margin: 0; }
-    .home-list li { max-width: none; padding: 9px 0; border-bottom: 1px solid rgba(33, 22, 13, .14); }
+    .home-list li { max-width: none; padding: 9px 0; border-bottom: 1px solid var(--rule); }
     .home-list a { text-decoration: none !important; }
     .home-list span { color: var(--muted); display: block; font-size: .92rem; }
     @media (max-width: 760px) {

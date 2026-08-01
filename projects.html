@@ -18,30 +18,42 @@
       justify-content: space-between;
       align-items: end;
       gap: 24px;
-      border-bottom: 1px solid rgba(33, 22, 13, .2);
+      border-bottom: 1px solid var(--rule);
       margin-bottom: 22px;
       padding-bottom: 18px;
     }
     .projects-hero p { color: var(--muted) !important; font-size: 1.1rem; }
-    .project-tabs {
+    .projects-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      min-width: min(100%, 420px);
+    }
+    .project-tabs,
+    .project-view-tabs {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
       gap: 8px;
-      min-width: min(100%, 420px);
     }
-    .project-tabs button {
+    .project-tabs button,
+    .project-view-tabs button {
       appearance: none;
-      border: 1px solid transparent;
-      background: rgba(40, 95, 97, .08);
+      border: 1.5px solid var(--ink);
+      border-radius: 6px;
+      background: transparent;
       color: var(--ink);
       cursor: pointer;
       min-height: 36px;
       padding: 5px 10px;
     }
-    .project-tabs button:hover { border-color: rgba(40, 95, 97, .32); }
-    .project-tabs button[aria-pressed="true"] { background: rgba(127, 63, 45, .11); }
+    .project-tabs button:hover,
+    .project-view-tabs button:hover { border-color: var(--accent); color: var(--accent); }
+    .project-tabs button[aria-pressed="true"],
+    .project-view-tabs button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: rgba(139, 0, 0, .055); }
     .project-count { color: var(--muted) !important; margin: 0 0 18px !important; font-size: .95rem; }
+    .projects-grid[hidden], .projects-timeline[hidden] { display: none !important; }
     .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
     project-card { display: block; min-height: 100%; }
     .project-card {
@@ -50,11 +62,11 @@
       flex-direction: column;
       min-height: 100% !important;
       border: 1px solid var(--rule);
-      background: rgba(255,255,255,.18);
+      background: transparent;
       overflow: hidden;
       text-decoration: none !important;
     }
-    .project-card:hover { border-color: var(--ink); background: rgba(255,255,255,.34); text-decoration: none !important; }
+    .project-card:hover { border-color: var(--accent); background: transparent; text-decoration: none !important; }
     .project-card *, .project-card:hover * { text-decoration: none !important; }
     .project-image { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--rule); background: var(--soft); }
     .project-body { display: flex; flex: 1; flex-direction: column; justify-content: space-between; padding: 17px; }
@@ -63,12 +75,76 @@
     .project-time { color: var(--muted) !important; font-size: .94rem; margin: 0 0 18px !important; }
     .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 22px; }
     .project-tags span { border: 1px solid var(--rule); color: var(--muted); font-size: .84rem; padding: 2px 7px; }
+    .projects-timeline {
+      border-top: 1px solid var(--rule);
+    }
+    .timeline-year {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 22px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .timeline-year h2 {
+      color: var(--accent) !important;
+      font-size: 1.75rem !important;
+      line-height: 1;
+      margin: 0 !important;
+    }
+    .timeline-items {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      padding-left: 20px;
+      border-left: 1px solid var(--rule);
+    }
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px 22px;
+      align-items: baseline;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -25px;
+      top: .48rem;
+      width: 9px;
+      height: 9px;
+      border: 1px solid var(--accent);
+      background: var(--paper);
+    }
+    .timeline-title {
+      display: inline;
+      font-size: 1.28rem;
+      line-height: 1.2;
+      text-decoration-thickness: 1px !important;
+    }
+    .timeline-summary {
+      color: var(--ink) !important;
+      font-size: .98rem;
+      line-height: 1.38;
+      margin: 5px 0 0 !important;
+    }
+    .timeline-meta {
+      color: var(--muted) !important;
+      font-size: .9rem;
+      margin: 0 !important;
+      white-space: nowrap;
+    }
     @media (max-width: 920px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 700px) {
       .projects-hero { display: block; }
-      .project-tabs { justify-content: flex-start; margin-top: 16px; min-width: 0; }
+      .projects-controls { align-items: flex-start; margin-top: 16px; min-width: 0; }
+      .project-tabs, .project-view-tabs { justify-content: flex-start; }
       .projects-grid { grid-template-columns: 1fr; }
       .project-title { font-size: 1.45rem !important; }
+      .timeline-year { grid-template-columns: 1fr; gap: 10px; padding: 20px 0; }
+      .timeline-items { gap: 18px; padding-left: 16px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 3px; }
+      .timeline-item::before { left: -21px; }
+      .timeline-meta { white-space: normal; }
     }
   </style>
 </head>
@@ -91,6 +167,7 @@
     <projects-section></projects-section>
   </main>
 
+  <script src="js/projects-data.js"></script>
   <script src="js/projects.js"></script>
 </body>
 </html>
