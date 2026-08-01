@@ -36,27 +36,27 @@
     }
     .switchboard-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
-      margin-bottom: 13px;
+      grid-template-columns: repeat(7, 30px);
+      gap: 5px;
+      margin-bottom: 14px;
     }
     .switchboard-grid a {
       border: 1px solid var(--rule-strong);
       border-radius: 5px;
       display: flex;
       align-items: center;
-      gap: 7px;
-      min-height: 32px;
-      padding: 4px 9px;
-      font-size: .94rem;
+      justify-content: center;
+      height: 30px;
+      width: 30px;
+      padding: 0;
       line-height: 1;
       text-decoration: none !important;
     }
     .switchboard-grid .fa {
       color: var(--accent);
       display: inline-block !important;
-      font-size: .86rem;
-      width: 1rem;
+      font-size: .9rem;
+      width: 1em;
       text-align: center;
     }
     .home-route {
@@ -84,7 +84,6 @@
     @media (max-width: 760px) {
       .home-hero { grid-template-columns: 1fr; }
       .home-intro p { font-size: 1.24rem; }
-      .switchboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .home-route { grid-template-columns: 72px minmax(0, 1fr); }
       .home-section h2 { font-size: 1.65rem !important; }
     }
@@ -114,13 +113,13 @@
       <aside class="home-switchboard" aria-label="Switchboard">
         <p class="home-meta">Switchboard</p>
         <nav class="switchboard-grid" aria-label="Primary links">
-          <a href="projects.html"><i class="fa fa-folder-open-o" aria-hidden="true"></i><span>Projects</span></a>
-          <a href="about.html"><i class="fa fa-user" aria-hidden="true"></i><span>About</span></a>
-          <a href="https://github.com/anishthite"><i class="fa fa-github" aria-hidden="true"></i><span>GitHub</span></a>
-          <a href="mailto:anishthite@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i><span>Email</span></a>
-          <a href="https://scholar.google.com/citations?hl=en&amp;user=HYCsOdoAAAAJ"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Scholar</span></a>
-          <a href="https://linkedin.com/in/anishthite/"><i class="fa fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span></a>
-          <a href="https://twitter.com/anishthite"><i class="fa fa-twitter" aria-hidden="true"></i><span>X</span></a>
+          <a href="projects.html" aria-label="Projects"><i class="fa fa-folder-open-o" aria-hidden="true"></i></a>
+          <a href="about.html" aria-label="About"><i class="fa fa-user" aria-hidden="true"></i></a>
+          <a href="https://github.com/anishthite" aria-label="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>
+          <a href="mailto:anishthite@gmail.com" aria-label="Email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+          <a href="https://scholar.google.com/citations?hl=en&amp;user=HYCsOdoAAAAJ" aria-label="Scholar"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+          <a href="https://linkedin.com/in/anishthite/" aria-label="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+          <a href="https://twitter.com/anishthite" aria-label="X"><i class="fa fa-twitter" aria-hidden="true"></i></a>
         </nav>
         <a class="home-route" href="https://github.com/anishthite/agent-dotfiles">
           <span class="tag">Agents</span>
