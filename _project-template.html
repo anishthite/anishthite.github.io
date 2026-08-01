@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project title - Anish Thite</title>
+  <meta name="description" content="Short project description.">
+  <link rel="icon" href="data:,">
+  <link href="css/paper.css" rel="stylesheet" type="text/css">
+</head>
+<body id="page-top" class="project-page-detail bg-stone-50 text-stone-900 font-sans">
+  <nav id="mainNav" class="fixed top-0 w-full bg-stone-800 text-stone-100 z-50 shadow-lg" aria-label="Site">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top">Anish Thite</a>
+        <div class="hidden md:block" id="bs-example-navbar-collapse-1">
+          <ul class="flex space-x-6">
+            <li><a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors">About</a></li>
+            <li><a href="projects.html" class="text-stone-100 hover:text-stone-300 transition-colors">Projects</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="project-detail-main container mx-auto px-4">
+    <!--
+      To make a project page:
+      1. Copy this file to a root-level filename, like my-project.html.
+      2. Edit the project-page attributes below.
+      3. Write normal HTML sections inside project-page.
+      4. Add or update the matching card entry in js/projects-data.js.
+    -->
+    <project-page
+      project-title="Project title"
+      type="Project type"
+      period="2026"
+      status="Prototype"
+      summary="One or two sentences explaining what this project is and why someone should open it."
+      tags="tag one, tag two, tag three"
+      primary-url="https://example.com"
+      primary-label="Open project"
+      repo-url="https://github.com/anishthite/example"
+      repo-label="Source">
+      <section>
+        <h2>What it is</h2>
+        <p>Write the core project explanation here. Keep it concrete: what exists, what someone can do with it, and what makes it interesting.</p>
+      </section>
+
+      <section>
+        <h2>Why I made it</h2>
+        <p>Describe the motivation, constraint, or question that shaped the project.</p>
+      </section>
+
+      <section>
+        <h2>Notes</h2>
+        <p>Add implementation details, screenshots, links, caveats, or next steps.</p>
+      </section>
+    </project-page>
+  </main>
+
+  <script src="js/project-page.js"></script>
+</body>
+</html>
