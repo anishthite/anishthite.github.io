@@ -23,25 +23,24 @@
     }
     #mainNav .site-title a:hover { color: var(--ink) !important; text-decoration: none !important; }
     .home-intro p { max-width: 700px; color: var(--soft-ink) !important; font-size: 1.55rem; }
-    .home-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 20px;
+    #mainNav #bs-example-navbar-collapse-1.nav-right {
+      display: flex !important;
+      align-items: center;
+      gap: 16px;
+      margin-left: auto;
     }
-    .home-links a {
-      border: 1px solid var(--rule-strong);
-      border-radius: 5px;
+    #mainNav .nav-icon-links {
       display: flex;
       align-items: center;
+      gap: 10px;
+    }
+    #mainNav .nav-icon-links a {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      height: 30px;
-      width: 30px;
-      padding: 0;
-      line-height: 1;
       text-decoration: none !important;
     }
-    .home-links .fa {
+    #mainNav .nav-icon-links .fa {
       color: var(--accent);
       display: inline-block !important;
       font-size: .9rem;
@@ -59,6 +58,10 @@
     .home-list a { text-decoration: none !important; }
     .home-list span { color: var(--muted); display: block; font-size: .92rem; }
     @media (max-width: 760px) {
+      .site-title { font-size: 1.45rem !important; }
+      #mainNav #bs-example-navbar-collapse-1.nav-right { gap: 10px; }
+      #mainNav #bs-example-navbar-collapse-1.nav-right ul { gap: 12px !important; }
+      #mainNav .nav-icon-links { gap: 7px; }
       .home-intro p { font-size: 1.24rem; }
       .home-section h2 { font-size: 1.65rem !important; }
     }
@@ -69,11 +72,18 @@
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
         <h1 class="site-title"><a class="text-stone-100 text-xl font-semibold font-adlam" href="index.html#page-top" aria-current="page">Anish Thite</a></h1>
-        <div class="hidden md:block" id="bs-example-navbar-collapse-1">
+        <div class="hidden md:block nav-right" id="bs-example-navbar-collapse-1">
           <ul class="flex space-x-6">
             <li><a href="about.html" class="text-stone-100 hover:text-stone-300 transition-colors">About</a></li>
             <li><a href="projects.html" class="text-stone-100 hover:text-stone-300 transition-colors">Projects</a></li>
           </ul>
+          <nav class="nav-icon-links" aria-label="Profile links">
+            <a href="https://github.com/anishthite" aria-label="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>
+            <a href="mailto:anishthite@gmail.com" aria-label="Email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+            <a href="https://scholar.google.com/citations?hl=en&amp;user=HYCsOdoAAAAJ" aria-label="Scholar"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+            <a href="https://linkedin.com/in/anishthite/" aria-label="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://twitter.com/anishthite" aria-label="X"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+          </nav>
         </div>
       </div>
     </div>
@@ -83,15 +93,6 @@
     <section class="home-hero">
       <div class="home-intro">
         <p>I build small software with a clear interaction: agent workflows, AI-adjacent toys, interactive explanations, and tools that make shipping feel concrete.</p>
-        <nav class="home-links" aria-label="Primary links">
-          <a href="projects.html" aria-label="Projects"><i class="fa fa-folder-open-o" aria-hidden="true"></i></a>
-          <a href="about.html" aria-label="About"><i class="fa fa-user" aria-hidden="true"></i></a>
-          <a href="https://github.com/anishthite" aria-label="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>
-          <a href="mailto:anishthite@gmail.com" aria-label="Email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-          <a href="https://scholar.google.com/citations?hl=en&amp;user=HYCsOdoAAAAJ" aria-label="Scholar"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
-          <a href="https://linkedin.com/in/anishthite/" aria-label="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-          <a href="https://twitter.com/anishthite" aria-label="X"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-        </nav>
       </div>
     </section>
 
