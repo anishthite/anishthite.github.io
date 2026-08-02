@@ -119,19 +119,17 @@
 
   class ProjectsSection extends HTMLElement {
     connectedCallback() {
+      this.embedded = this.hasAttribute("embedded");
       this.activeFilter = "all";
       this.activeView = "cards";
+      this.classList.toggle("projects-section-embedded", this.embedded);
       this.renderShell();
       this.renderProjects();
     }
 
     renderShell() {
-      this.innerHTML = `
-        <header class="projects-hero">
-          <div>
-            <h1>Projects</h1>
-            <p>Small tools, agent workflows, explainers, research artifacts, and web experiments.</p>
-          </div>
+      const headingTag = this.embedded ? "h2" : "h1";
+      const controls = this.embedded ? "" : `
           <div class="projects-controls">
             <div class="project-view-tabs view-tabs" role="group" aria-label="Project view">
               ${views.map(view => `
@@ -144,9 +142,18 @@
               `).join("")}
             </div>
           </div>
+      `;
+
+      this.innerHTML = `
+        <header class="projects-hero">
+          <div>
+            <${headingTag}>Projects</${headingTag}>
+            <p>Small tools, agent workflows, explainers, research artifacts, and web experiments.</p>
+          </div>
+          ${controls}
         </header>
 
-        <p class="project-count"></p>
+        <p class="project-count"${this.embedded ? " hidden" : ""}></p>
         <section class="projects-grid" aria-label="Project cards"></section>
         <section class="projects-timeline" aria-label="Project timeline" hidden></section>
       `;
