@@ -43,6 +43,16 @@
     return "experiments";
   };
 
+  const slugify = value => String(value || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || "project";
+
+  const projectSlug = project => project.slug || slugify(project.title);
+
+  const projectPageUrl = project => `project.html?project=${encodeURIComponent(projectSlug(project))}`;
+
   const projectRelatedLinks = (project, className) => {
     const links = Array.isArray(project.relatedLinks)
       ? project.relatedLinks.filter(link => link && link.url && link.label)
@@ -428,15 +438,16 @@
 
       const project = this.project;
       const kind = projectKind(project);
+      const pageUrl = projectPageUrl(project);
 
       this.innerHTML = `
         <article class="project-card" data-kind="${kind}">
-          <a class="project-card-media" href="${esc(project.url)}" aria-label="${esc(project.title)} project">
+          <a class="project-card-media" href="${esc(pageUrl)}" aria-label="${esc(project.title)} project">
             <img class="project-image" src="${preview(project, this.index)}" alt="">
           </a>
           <div class="project-body">
             <div>
-              <h2 class="project-title"><a href="${esc(project.url)}">${esc(project.title)}</a></h2>
+              <h2 class="project-title"><a href="${esc(pageUrl)}">${esc(project.title)}</a></h2>
               <p class="project-summary">${esc(project.summary)}</p>
               ${project.details ? `<p class="project-details">${esc(project.details)}</p>` : ""}
               ${projectRelatedLinks(project, "project-related-links")}
@@ -575,7 +586,7 @@
             ${group.items.map(({project}) => `
               <article class="timeline-item">
                 <div>
-                  <a class="timeline-title" href="${esc(project.url)}">${esc(project.title)}</a>
+                  <a class="timeline-title" href="${esc(projectPageUrl(project))}">${esc(project.title)}</a>
                   <p class="timeline-summary">${esc(project.summary)}</p>
                   ${project.details ? `<p class="timeline-details">${esc(project.details)}</p>` : ""}
                   ${projectRelatedLinks(project, "timeline-related-links")}
