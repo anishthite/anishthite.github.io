@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spec - tweet project candidates</title>
+<meta name="task" content="Refresh projects list with tweet-derived project candidates">
+<meta name="date-started" content="2026-08-03">
+<meta name="date-updated" content="2026-08-03">
+<meta name="status" content="ready-for-review">
+<meta name="blast-radius" content="low">
+<meta name="tags" content="projects,tweets,portfolio">
+<meta name="related" content="2026-07-22-project-github-index.html">
+<style>
+  body { font: 14px/1.45 -apple-system, system-ui, sans-serif; max-width: 880px; margin: 1.5rem auto; padding: 0 1rem; color: #111; }
+  h1 { font-size: 20px; margin: 0 0 .25rem; }
+  h2 { font-size: 15px; margin: 1.4rem 0 .4rem; border-bottom: 1px solid #ddd; padding-bottom: .2rem; }
+  table { border-collapse: collapse; width: 100%; margin: .4rem 0 .8rem; }
+  th, td { border: 1px solid #ddd; padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: #f6f6f6; font-weight: 600; }
+  code { background: #f1f1f1; padding: 1px 4px; border-radius: 3px; font-size: 12.5px; }
+  ul { margin: .3rem 0 .8rem 1.2rem; padding: 0; }
+  li { margin: .15rem 0; }
+  .blast-low { color: #2a7a2a; }
+  .meta { color: #555; font-size: 12.5px; margin-bottom: .8rem; }
+  .kv { display: grid; grid-template-columns: 140px 1fr; gap: 2px 14px; font-size: 13px; margin: .4rem 0 1rem; }
+  .kv b { color: #444; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>Tweet Project Candidates</h1>
+<p class="meta"><code>master</code> · worktree <code>/home/vercel-sandbox/anishthite.github.io</code> · 2026-08-03 · status <b>ready-for-review</b> · blast <span class="blast-low">low</span></p>
+
+<h2>Summary</h2>
+<div class="kv">
+  <b>Goal</b><div>Refresh the visible project catalog with project candidates found in public <code>@anishthite</code> tweets.</div>
+  <b>Source</b><div>Attached scrape brief covering 970 accessible public tweets and replies from 2025-03-02 through 2026-08-02.</div>
+  <b>Surface</b><div><code>projects.html</code> and the embedded homepage project grid.</div>
+  <b>Schema</b><div>Add optional <code>details</code> and <code>relatedLinks</code> fields to <code>window.siteProjects</code>.</div>
+  <b>Mobile</b><div>Metadata remains wrapped inline inside the existing single-column mobile card layout.</div>
+  <b>Open Qs</b><div>Which low-confidence candidates should remain after manual filtering.</div>
+</div>
+
+<h2>Files</h2>
+<table>
+  <tr><th>Path</th><th>Kind</th><th>Delta</th></tr>
+  <tr><td><code>js/projects-data.js</code></td><td>touch</td><td>Expanded the project catalog and folded Playscape/Sitebrew generated examples into root project details.</td></tr>
+  <tr><td><code>js/projects.js</code></td><td>touch</td><td>Render optional detail text and related links without nested card anchors.</td></tr>
+  <tr><td><code>css/paper.css</code></td><td>touch</td><td>Style card and timeline detail metadata.</td></tr>
+  <tr><td><code>implementation-notes/INDEX.html</code></td><td>touch</td><td>Add this note to the implementation index.</td></tr>
+</table>
+
+<h2>Decisions</h2>
+<table>
+  <tr><th>ID</th><th>Choice · Rationale</th></tr>
+  <tr><td>D-001</td><td>Merge <code>Commiter</code> into <code>didweship.today</code>. The tweet brief supplied the public shipping-counter name and URL for the same visible concept.</td></tr>
+  <tr><td>D-002</td><td>Merge the existing agent tools card into <code>agent-dotfiles</code>. The new brief supplied the concrete repository name and scope.</td></tr>
+  <tr><td>D-003</td><td>Keep low-confidence candidates visible. The brief explicitly asked to err on inclusion so the list can be filtered later.</td></tr>
+  <tr><td>D-004</td><td>Do not add standalone cards for individual generated Playscape/Sitebrew games. Those examples are folded into root project details and related links.</td></tr>
+</table>
+
+<h2>Definition of done</h2>
+<ul>
+  <li>Done · Required projects appear: Playscape, Pi usage visualizer, didweship.today, VercelNet, and AnishHand.</li>
+  <li>Done · Generated Playscape/Sitebrew examples are not standalone project cards.</li>
+  <li>Done · Existing card and timeline views render optional metadata.</li>
+  <li>Done · Syntax and static-site checks pass; legacy Gulp build runs under Node 10.</li>
+</ul>
+</body>
+</html>

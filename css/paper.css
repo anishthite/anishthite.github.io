@@ -436,6 +436,10 @@ project-card {
 .project-card:hover * {
   text-decoration: none !important;
 }
+.project-card-media {
+  display: block;
+  color: inherit !important;
+}
 .project-image {
   display: block;
   width: 100%;
@@ -456,10 +460,43 @@ project-card {
   margin: 0 0 12px !important;
   max-width: 17ch;
 }
+.project-title a {
+  color: inherit !important;
+}
+.project-card:hover .project-title a {
+  color: var(--accent) !important;
+}
 .project-summary {
   font-size: 1.04rem;
   line-height: 1.42;
-  margin-bottom: 18px !important;
+  margin-bottom: 12px !important;
+}
+.project-details {
+  color: var(--muted) !important;
+  font-size: .94rem;
+  line-height: 1.38;
+  margin-bottom: 14px !important;
+}
+.project-related-links,
+.timeline-related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 16px;
+}
+.project-related-links a,
+.timeline-related-links a {
+  border: 1px solid var(--rule);
+  color: var(--muted) !important;
+  display: inline-flex;
+  font-size: .82rem;
+  line-height: 1.2;
+  padding: 3px 7px;
+}
+.project-related-links a:hover,
+.timeline-related-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent) !important;
 }
 .project-time {
   color: var(--muted) !important;
@@ -529,6 +566,15 @@ project-card {
   font-size: .98rem;
   line-height: 1.38;
   margin: 5px 0 0 !important;
+}
+.timeline-details {
+  color: var(--muted) !important;
+  font-size: .94rem;
+  line-height: 1.36;
+  margin: 5px 0 8px !important;
+}
+.timeline-related-links {
+  margin: 8px 0 0;
 }
 .timeline-meta {
   color: var(--muted) !important;
