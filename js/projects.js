@@ -43,6 +43,22 @@
     return "experiments";
   };
 
+  const projectRelatedLinks = (project, className) => {
+    const links = Array.isArray(project.relatedLinks)
+      ? project.relatedLinks.filter(link => link && link.url && link.label)
+      : [];
+
+    if (!links.length) {
+      return "";
+    }
+
+    return `
+      <div class="${className}" aria-label="${esc(project.title)} related links">
+        ${links.map(link => `<a href="${esc(link.url)}">${esc(link.label)}</a>`).join("")}
+      </div>
+    `;
+  };
+
   const timelineYear = project => {
     const years = String(project.period).match(/\d{4}/g) || [];
     return years.length ? Math.max(...years.map(Number)) : 0;
@@ -414,17 +430,21 @@
       const kind = projectKind(project);
 
       this.innerHTML = `
-        <a class="project-card" href="${esc(project.url)}" data-kind="${kind}" aria-label="${esc(project.title)} project">
-          <img class="project-image" src="${preview(project, this.index)}" alt="">
+        <article class="project-card" data-kind="${kind}">
+          <a class="project-card-media" href="${esc(project.url)}" aria-label="${esc(project.title)} project">
+            <img class="project-image" src="${preview(project, this.index)}" alt="">
+          </a>
           <div class="project-body">
             <div>
-              <h2 class="project-title">${esc(project.title)}</h2>
+              <h2 class="project-title"><a href="${esc(project.url)}">${esc(project.title)}</a></h2>
               <p class="project-summary">${esc(project.summary)}</p>
+              ${project.details ? `<p class="project-details">${esc(project.details)}</p>` : ""}
+              ${projectRelatedLinks(project, "project-related-links")}
               <p class="project-time">${esc(project.period)} - ${esc(project.type)}</p>
             </div>
             <div class="project-tags">${project.tags.map(tag => `<span>${esc(tag)}</span>`).join("")}</div>
           </div>
-        </a>
+        </article>
       `;
     }
   }
@@ -557,6 +577,8 @@
                 <div>
                   <a class="timeline-title" href="${esc(project.url)}">${esc(project.title)}</a>
                   <p class="timeline-summary">${esc(project.summary)}</p>
+                  ${project.details ? `<p class="timeline-details">${esc(project.details)}</p>` : ""}
+                  ${projectRelatedLinks(project, "timeline-related-links")}
                 </div>
                 <p class="timeline-meta">${esc(project.period)} - ${esc(project.type)}</p>
               </article>
