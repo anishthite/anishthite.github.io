@@ -74,16 +74,56 @@
     return cleaned;
   };
 
-  const serialize = projects => `window.siteProjects = ${JSON.stringify(projects.map(cleanProject), null, 2)};\n`;
+  const projectKeyOrder = [
+    "title",
+    "slug",
+    "period",
+    "type",
+    "url",
+    "summary",
+    "details",
+    "primaryLabel",
+    "relatedLinks",
+    "tags",
+    "thumbnail",
+    "visual"
+  ];
+
+  const inlineArray = values => `[${values.map(value => JSON.stringify(value)).join(", ")}]`;
+
+  const inlineLink = link => `{label: ${JSON.stringify(link.label)}, url: ${JSON.stringify(link.url)}}`;
+
+  const serializeProject = project => {
+    const cleaned = cleanProject(project);
+    const entries = projectKeyOrder
+      .filter(key => Object.prototype.hasOwnProperty.call(cleaned, key))
+      .map(key => {
+        if (key === "relatedLinks") {
+          return `relatedLinks: [\n      ${cleaned.relatedLinks.map(inlineLink).join(",\n      ")}\n    ]`;
+        }
+
+        if (key === "tags") {
+          return `tags: ${inlineArray(cleaned.tags)}`;
+        }
+
+        return `${key}: ${JSON.stringify(cleaned[key])}`;
+      });
+
+    return `  {\n    ${entries.join(",\n    ")}\n  }`;
+  };
+
+  const serialize = projects => `window.siteProjects = [\n${projects.map(serializeProject).join(",\n")}\n];\n`;
 
   class ProjectsEditor extends HTMLElement {
     connectedCallback() {
       this.projects = clone(window.siteProjects || []);
+      this.saveApiAvailable = false;
       const requested = new URLSearchParams(window.location.search).get("project");
       this.selectedIndex = Math.max(0, this.projects.findIndex(project => projectSlug(project) === requested));
       this.render();
       this.bind();
       this.select(this.selectedIndex);
+      this.detectSaveApi(requested);
     }
 
     render() {
@@ -92,7 +132,7 @@
           <header class="projects-editor-hero">
             <div>
               <h1>Project Editor</h1>
-              <p>${this.projects.length} entries in <code>js/projects-data.js</code>.</p>
+              <p><span data-role="project-count">${this.projects.length}</span> entries in <code data-role="source-path">js/projects-data.js</code>.</p>
             </div>
             <div class="projects-editor-actions">
               <button type="button" data-action="add">New</button>
@@ -169,6 +209,7 @@
               </label>
 
               <div class="projects-editor-actions">
+                <button type="button" data-action="save" data-role="save" hidden>Save file</button>
                 <button type="button" data-action="copy">Copy JS</button>
                 <a data-role="download" download="projects-data.js">Download JS</a>
                 <span data-role="status" aria-live="polite"></span>
@@ -184,6 +225,9 @@
       this.form = this.querySelector(".projects-editor-form");
       this.output = this.querySelector('[data-role="output"]');
       this.status = this.querySelector('[data-role="status"]');
+      this.count = this.querySelector('[data-role="project-count"]');
+      this.sourcePath = this.querySelector('[data-role="source-path"]');
+      this.saveButton = this.querySelector('[data-role="save"]');
       this.search = this.querySelector('[data-role="search"]');
       this.renderLink = this.querySelector('[data-role="render-link"]');
       this.primaryLink = this.querySelector('[data-role="primary-link"]');
@@ -229,6 +273,11 @@
 
       if (action === "copy") {
         this.copyOutput();
+      }
+
+      if (action === "save") {
+        this.saveFile();
+        return;
       }
 
       this.renderList();
@@ -317,20 +366,84 @@
       const blob = new Blob([output], {type: "text/javascript"});
 
       this.output.value = output;
+      this.count.textContent = String(this.projects.length);
       if (this.download.href) {
         URL.revokeObjectURL(this.download.href);
       }
       this.download.href = URL.createObjectURL(blob);
     }
 
+    async detectSaveApi(requestedSlug) {
+      try {
+        const response = await fetch("api/projects", {
+          headers: {"accept": "application/json"},
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          throw new Error("Save API unavailable");
+        }
+
+        const payload = await response.json();
+        if (!Array.isArray(payload.projects)) {
+          throw new Error("Save API did not return projects");
+        }
+
+        this.projects = clone(payload.projects);
+        this.saveApiAvailable = true;
+        this.saveButton.hidden = false;
+        this.sourcePath.textContent = payload.path || "js/projects-data.js";
+
+        const nextIndex = requestedSlug
+          ? this.projects.findIndex(project => projectSlug(project) === requestedSlug)
+          : this.selectedIndex;
+        this.select(Math.max(0, nextIndex));
+        this.setStatus("Direct save enabled.");
+      } catch (error) {
+        this.saveApiAvailable = false;
+        this.saveButton.hidden = true;
+      }
+    }
+
+    async saveFile() {
+      if (!this.saveApiAvailable) {
+        this.setStatus("Open this page through scripts/projects-editor-server.js to save.");
+        return;
+      }
+
+      this.updateCurrent();
+      this.setStatus("Saving...");
+
+      try {
+        const response = await fetch("api/projects", {
+          method: "PUT",
+          headers: {"content-type": "application/json"},
+          body: JSON.stringify({projects: this.projects})
+        });
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || "Save failed");
+        }
+
+        this.setStatus(`Saved ${payload.projectCount} projects.`);
+      } catch (error) {
+        this.setStatus(error.message || "Save failed.");
+      }
+    }
+
     async copyOutput() {
       try {
         await navigator.clipboard.writeText(this.output.value);
-        this.status.textContent = "Copied.";
+        this.setStatus("Copied.");
       } catch (error) {
         this.output.select();
-        this.status.textContent = "Select and copy from the textarea.";
+        this.setStatus("Select and copy from the textarea.");
       }
+    }
+
+    setStatus(message) {
+      this.status.textContent = message;
     }
   }
 
