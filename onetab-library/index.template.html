@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A searchable library of saved links, gathered from three OneTab pages.">
+  <title>Link Index</title>
+  <style>
+    :root {
+      --paper: #f4f0e8;
+      --ink: #1c211d;
+      --muted: #656b63;
+      --rule: #d4cec1;
+      --accent: #d95b3e;
+      --accent-dark: #9f3827;
+      --leaf: #49785f;
+      --card: #fbf9f4;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 5% 15%, rgba(217, 91, 62, .08), transparent 22rem),
+        radial-gradient(circle at 90% 12%, rgba(73, 120, 95, .12), transparent 28rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+
+    .masthead {
+      border-bottom: 1px solid var(--rule);
+      padding: 18px max(24px, calc((100vw - 1320px) / 2));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-size: 1.05rem;
+    }
+    .brand-mark {
+      display: grid;
+      grid-template-columns: repeat(2, 7px);
+      gap: 3px;
+      transform: rotate(-10deg);
+    }
+    .brand-mark i { display: block; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+    .brand-mark i:nth-child(2) { background: var(--leaf); }
+    .issue { color: var(--muted); font-size: .78rem; letter-spacing: .11em; text-transform: uppercase; }
+
+    main { width: min(1320px, calc(100% - 48px)); margin: 0 auto; }
+    .hero {
+      min-height: 410px;
+      padding: clamp(64px, 10vw, 132px) 0 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .7fr);
+      gap: clamp(32px, 9vw, 130px);
+      align-items: end;
+    }
+    .eyebrow, .section-label {
+      margin: 0 0 15px;
+      color: var(--accent-dark);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 750px;
+      margin-bottom: 22px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(4rem, 8.2vw, 8rem);
+      line-height: .84;
+      letter-spacing: -.075em;
+    }
+    h1 em { color: var(--accent); font-style: italic; }
+    .intro { max-width: 590px; color: #3e463f; font-size: clamp(1.03rem, 1.5vw, 1.22rem); line-height: 1.6; }
+    .hero-note {
+      position: relative;
+      padding: 28px 26px 24px;
+      border: 1px solid var(--ink);
+      background: #ebe5d9;
+      box-shadow: 8px 8px 0 var(--accent);
+      transform: rotate(1.5deg);
+    }
+    .hero-note::before { content: "✦"; color: var(--accent); position: absolute; right: 18px; top: 12px; font-size: 1.25rem; }
+    .hero-note strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 2.5rem; line-height: .95; letter-spacing: -.06em; }
+    .hero-note p { margin: 13px 0 0; line-height: 1.45; color: var(--muted); font-size: .88rem; }
+
+    .stats {
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat { min-height: 133px; padding: 25px 24px; border-left: 1px solid var(--rule); }
+    .stat:first-child { border-left: 0; }
+    .stat-value { display: block; font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4rem); line-height: .9; letter-spacing: -.06em; }
+    .stat-label { display: block; margin-top: 13px; color: var(--muted); font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
+    .library { padding: 80px 0 100px; }
+    .library-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 27px; }
+    .library-heading h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(2.7rem, 4.5vw, 4.7rem); letter-spacing: -.065em; line-height: .92; }
+    .library-heading p { max-width: 380px; margin: 0; color: var(--muted); font-size: .91rem; line-height: 1.5; }
+    .control-bar {
+      padding: 12px;
+      border: 1px solid var(--ink);
+      background: var(--card);
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(165px, .35fr) auto;
+      gap: 10px;
+      box-shadow: 5px 5px 0 rgba(28, 33, 29, .12);
+    }
+    .search-wrap { position: relative; }
+    .search-wrap span { position: absolute; left: 14px; top: 50%; color: var(--muted); transform: translateY(-50%); font-size: 1.1rem; }
+    input, select {
+      min-width: 0;
+      width: 100%;
+      border: 1px solid #b8b0a3;
+      border-radius: 0;
+      background: #fffdf9;
+      color: var(--ink);
+      padding: 13px 14px;
+      outline-offset: 2px;
+    }
+    input { padding-left: 39px; }
+    .clear-button { border: 1px solid var(--ink); background: transparent; color: var(--ink); padding: 0 18px; font-size: .78rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .clear-button:hover { color: #fff; background: var(--ink); }
+    .filters { display: flex; gap: 8px; overflow-x: auto; padding: 23px 0 20px; scrollbar-width: thin; }
+    .filter-chip {
+      white-space: nowrap;
+      border: 1px solid var(--rule);
+      background: transparent;
+      color: #4b514a;
+      padding: 8px 11px;
+      font-size: .78rem;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .filter-chip:hover, .filter-chip[aria-pressed="true"] { color: #fff; border-color: var(--ink); background: var(--ink); }
+    .result-line { display: flex; justify-content: space-between; gap: 20px; margin: 3px 0 18px; color: var(--muted); font-size: .83rem; }
+    .result-line b { color: var(--ink); }
+    .link-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 184px;
+      padding: 22px 24px 20px;
+      border-bottom: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+      background: transparent;
+      transition: background .15s, transform .15s;
+    }
+    .link-card:nth-child(even) { border-right: 0; }
+    .link-card:hover { background: rgba(255, 253, 249, .72); transform: translateY(-2px); }
+    .card-meta { display: flex; justify-content: space-between; align-items: center; gap: 14px; color: var(--muted); font-size: .71rem; font-weight: 800; letter-spacing: .075em; text-transform: uppercase; }
+    .host { color: var(--leaf); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .link-title { margin: 16px 0 17px; font-family: var(--serif); font-size: clamp(1.22rem, 1.8vw, 1.62rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.12; }
+    .open-link { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; color: var(--accent-dark); font-size: .75rem; font-weight: 800; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
+    .open-link span { font-size: 1.1rem; transition: transform .15s; }
+    .open-link:hover span { transform: translate(2px, -2px); }
+    .empty { grid-column: 1 / -1; padding: 70px 20px; text-align: center; border-bottom: 1px solid var(--rule); }
+    .empty h3 { margin-bottom: 8px; font-family: var(--serif); font-size: 2rem; font-weight: 400; letter-spacing: -.04em; }
+    .empty p { margin: 0; color: var(--muted); }
+    .load-more { display: block; margin: 32px auto 0; border: 1px solid var(--ink); background: var(--accent); color: #fff; padding: 14px 22px; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--ink); }
+    .load-more:hover { background: var(--accent-dark); }
+    .load-more[hidden] { display: none; }
+
+    .provenance { border-top: 1px solid var(--rule); padding: 36px 0 50px; display: grid; grid-template-columns: 1fr 2fr; gap: 30px; color: var(--muted); font-size: .83rem; line-height: 1.55; }
+    .provenance h2 { margin: 0; color: var(--ink); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
+    .provenance p { margin-bottom: 10px; }
+    .source-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .source-links a { color: var(--ink); }
+    .source-links a:hover { color: var(--accent-dark); }
+    footer { padding: 22px max(24px, calc((100vw - 1320px) / 2)); background: var(--ink); color: #ede8de; display: flex; justify-content: space-between; gap: 20px; font-size: .78rem; }
+    footer a { color: inherit; }
+
+    @media (max-width: 760px) {
+      main { width: min(100% - 30px, 1320px); }
+      .masthead { padding: 15px; }
+      .issue { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 70px; gap: 45px; }
+      .hero-note { max-width: 360px; justify-self: end; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(3) { border-left: 0; border-top: 1px solid var(--rule); }
+      .stat:nth-child(4) { border-top: 1px solid var(--rule); }
+      .library { padding-top: 60px; }
+      .library-heading { display: block; }
+      .library-heading p { margin-top: 20px; }
+      .control-bar { grid-template-columns: 1fr; }
+      .clear-button { min-height: 43px; }
+      .link-list { grid-template-columns: 1fr; }
+      .link-card, .link-card:nth-child(even) { border-right: 0; }
+      .provenance { grid-template-columns: 1fr; gap: 14px; }
+      footer { padding: 18px 15px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="#top" aria-label="Link Index home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Link Index</a>
+    <span class="issue">A personal index of things worth returning to</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">The saved tab cabinet</p>
+        <h1 id="page-title">A better place<br>for <em>later.</em></h1>
+        <p class="intro">An unruly stack of open tabs, gathered into a library you can actually browse. Search the title, filter by source, or wander toward whatever caught your attention before.</p>
+      </div>
+      <aside class="hero-note" aria-label="About this collection">
+        <strong>Keep the<br>good stuff.</strong>
+        <p>Every link remains in its original saved order. The point is not to finish the list—it is to make returning to it feel easy.</p>
+      </aside>
+    </section>
+
+    <section class="stats" aria-label="Collection statistics">
+      <div class="stat"><span class="stat-value" id="saved-count">—</span><span class="stat-label">saved links</span></div>
+      <div class="stat"><span class="stat-value" id="unique-count">—</span><span class="stat-label">unique destinations</span></div>
+      <div class="stat"><span class="stat-value" id="host-count">—</span><span class="stat-label">places on the web</span></div>
+      <div class="stat"><span class="stat-value" id="page-count">—</span><span class="stat-label">source pages</span></div>
+    </section>
+
+    <section class="library" aria-labelledby="library-title">
+      <div class="library-heading">
+        <div><p class="section-label">Browse the collection</p><h2 id="library-title">Find a thread.</h2></div>
+        <p>The whole collection is here. Search is local and immediate; a link never leaves this page until you choose to open it.</p>
+      </div>
+      <div class="control-bar">
+        <label class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" autocomplete="off" placeholder="Search saved titles, sites, or URLs" aria-label="Search saved links"></label>
+        <select id="host-select" aria-label="Filter by website"><option value="">Every website</option></select>
+        <button class="clear-button" id="clear-filters" type="button">Reset</button>
+      </div>
+      <div class="filters" id="quick-filters" aria-label="Frequently saved websites"></div>
+      <div class="result-line"><span id="result-count" aria-live="polite"></span><span>Sorted by original save order</span></div>
+      <div class="link-list" id="link-list"></div>
+      <button class="load-more" id="load-more" type="button">Show more links</button>
+    </section>
+
+    <aside class="provenance" aria-label="Collection notes">
+      <h2>On the record</h2>
+      <div>
+        <p>This index groups 671 saved-link occurrences from three shared OneTab pages. Repeated saves are deliberately kept: sometimes the same thing earns its way back onto the desk.</p>
+        <div class="source-links" id="source-links"></div>
+      </div>
+    </aside>
+  </main>
+
+  <footer><span>Link Index · made from a saved-tab archive</span><a href="#top">Back to the top ↑</a></footer>
+
+  <script>
+    /*__READING_LIBRARY_DATA__*/
+
+    (() => {
+      const { pages, links, summary } = window.READING_LIBRARY;
+      const state = { query: "", host: "", visible: 40 };
+      const $ = (selector) => document.querySelector(selector);
+      const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+      })[character]);
+      const hostCount = new Map();
+      links.forEach((link) => hostCount.set(link.host, (hostCount.get(link.host) || 0) + 1));
+      const orderedHosts = [...hostCount.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+      $("#saved-count").textContent = summary.savedLinks.toLocaleString();
+      $("#unique-count").textContent = summary.uniqueUrls.toLocaleString();
+      $("#host-count").textContent = summary.hosts.toLocaleString();
+      $("#page-count").textContent = pages.length;
+
+      $("#host-select").insertAdjacentHTML("beforeend", orderedHosts.map(([host, count]) =>
+        `<option value="${escapeHtml(host)}">${escapeHtml(host)} · ${count}</option>`
+      ).join(""));
+
+      $("#quick-filters").innerHTML = orderedHosts.slice(0, 10).map(([host, count]) =>
+        `<button class="filter-chip" data-host="${escapeHtml(host)}" type="button" aria-pressed="false">${escapeHtml(host)} <small>(${count})</small></button>`
+      ).join("");
+
+      $("#source-links").innerHTML = pages.map((page) =>
+        `<a href="${escapeHtml(page.sourceUrl)}" target="_blank" rel="noreferrer">Source page ${page.number} ↗</a>`
+      ).join(" · ");
+
+      function matchingLinks() {
+        const needle = state.query.trim().toLowerCase();
+        return links.filter((link) => {
+          const matchesHost = !state.host || link.host === state.host;
+          const haystack = `${link.title} ${link.host} ${link.url}`.toLowerCase();
+          return matchesHost && (!needle || haystack.includes(needle));
+        });
+      }
+
+      function render() {
+        const matches = matchingLinks();
+        const shown = matches.slice(0, state.visible);
+        $("#result-count").innerHTML = `<b>${matches.length.toLocaleString()}</b> ${matches.length === 1 ? "link" : "links"}${state.host ? ` from <b>${escapeHtml(state.host)}</b>` : ""}`;
+        $("#link-list").innerHTML = shown.length ? shown.map((link) => `
+          <article class="link-card">
+            <div class="card-meta"><span class="host">${escapeHtml(link.host)}</span><span>List ${link.page} · #${link.position}</span></div>
+            <h3 class="link-title">${escapeHtml(link.title)}</h3>
+            <a class="open-link" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">Open link <span aria-hidden="true">↗</span></a>
+          </article>
+        `).join("") : `<div class="empty"><h3>Nothing in this drawer.</h3><p>Try a shorter search, or clear the website filter.</p></div>`;
+        $("#load-more").hidden = shown.length >= matches.length;
+        document.querySelectorAll(".filter-chip").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.host === state.host));
+        });
+      }
+
+      $("#search").addEventListener("input", (event) => { state.query = event.target.value; state.visible = 40; render(); });
+      $("#host-select").addEventListener("change", (event) => { state.host = event.target.value; state.visible = 40; render(); });
+      $("#quick-filters").addEventListener("click", (event) => {
+        const button = event.target.closest("[data-host]");
+        if (!button) return;
+        state.host = state.host === button.dataset.host ? "" : button.dataset.host;
+        state.visible = 40;
+        $("#host-select").value = state.host;
+        render();
+      });
+      $("#clear-filters").addEventListener("click", () => {
+        state.query = "";
+        state.host = "";
+        state.visible = 40;
+        $("#search").value = "";
+        $("#host-select").value = "";
+        render();
+      });
+      $("#load-more").addEventListener("click", () => { state.visible += 80; render(); });
+      render();
+    })();
+  </script>
+</body>
+</html>
