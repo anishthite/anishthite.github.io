@@ -4,6 +4,7 @@ set -euo pipefail
 if [ "$#" -lt 2 ]; then
   echo "Usage: scripts/new-project-page.sh <slug-or-file.html> <Project title>" >&2
   echo "Example: scripts/new-project-page.sh cafe-map \"Cafe Map\"" >&2
+  echo "For normal data-rendered pages, edit projects-editor.html or js/projects-data.js instead." >&2
   exit 1
 fi
 
@@ -30,3 +31,4 @@ PROJECT_TITLE="$title" perl -0pi -e 's/Project title/$ENV{PROJECT_TITLE}/g' "$sl
 
 echo "Created $slug"
 echo "Next: edit $slug, then add a matching entry in js/projects-data.js with url: \"$slug\"."
+echo "For normal project pages, use project.html?project=<slug> and keep details in js/projects-data.js."

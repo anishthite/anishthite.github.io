@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spec - project detail editor</title>
+<meta name="task" content="Add rendered project detail pages and editor helper">
+<meta name="date-started" content="2026-08-06">
+<meta name="date-updated" content="2026-08-06">
+<meta name="status" content="ready-for-review">
+<meta name="blast-radius" content="low">
+<meta name="tags" content="projects,editor,detail-pages">
+<meta name="related" content="2026-08-03-tweet-project-candidates.html">
+<style>
+  body { font: 14px/1.45 -apple-system, system-ui, sans-serif; max-width: 880px; margin: 1.5rem auto; padding: 0 1rem; color: #111; }
+  h1 { font-size: 20px; margin: 0 0 .25rem; }
+  h2 { font-size: 15px; margin: 1.4rem 0 .4rem; border-bottom: 1px solid #ddd; padding-bottom: .2rem; }
+  table { border-collapse: collapse; width: 100%; margin: .4rem 0 .8rem; }
+  th, td { border: 1px solid #ddd; padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: #f6f6f6; font-weight: 600; }
+  code { background: #f1f1f1; padding: 1px 4px; border-radius: 3px; font-size: 12.5px; }
+  ul { margin: .3rem 0 .8rem 1.2rem; padding: 0; }
+  .blast-low { color: #2a7a2a; }
+  .meta { color: #555; font-size: 12.5px; margin-bottom: .8rem; }
+  .kv { display: grid; grid-template-columns: 140px 1fr; gap: 2px 14px; font-size: 13px; margin: .4rem 0 1rem; }
+  .kv b { color: #444; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>Project Detail Editor</h1>
+<p class="meta"><code>master</code> · worktree <code>/home/vercel-sandbox/anishthite.github.io</code> · 2026-08-06 · status <b>ready-for-review</b> · blast <span class="blast-low">low</span></p>
+
+<h2>Summary</h2>
+<div class="kv">
+  <b>Goal</b><div>Make project entries easier to edit and render as individual detail pages.</div>
+  <b>Surface</b><div><code>project.html?project=&lt;slug&gt;</code> for rendered pages and <code>projects-editor.html</code> for structured editing.</div>
+  <b>Source</b><div>Existing <code>js/projects-data.js</code>; no database or build-time content layer.</div>
+  <b>Mobile</b><div>Editor form and project list collapse to one column.</div>
+  <b>Open Qs</b><div>Whether to expose the editor from public navigation or keep it as a direct utility URL.</div>
+</div>
+
+<h2>Files</h2>
+<table>
+  <tr><th>Path</th><th>Kind</th><th>Delta</th></tr>
+  <tr><td><code>project.html</code></td><td>new</td><td>Generic data-driven project detail renderer.</td></tr>
+  <tr><td><code>projects-editor.html</code></td><td>new</td><td>Static editor shell for project catalog entries.</td></tr>
+  <tr><td><code>js/project-page.js</code></td><td>touch</td><td>Add <code>project-detail-view</code> custom element.</td></tr>
+  <tr><td><code>js/projects-editor.js</code></td><td>new</td><td>Client-side editing, copy, download, and render-link behavior.</td></tr>
+  <tr><td><code>js/projects.js</code></td><td>touch</td><td>Route cards and timeline items to rendered project detail pages.</td></tr>
+  <tr><td><code>css/paper.css</code></td><td>touch</td><td>Add project detail list and editor layout styles.</td></tr>
+</table>
+
+<h2>Decisions</h2>
+<table>
+  <tr><th>ID</th><th>Choice · Rationale</th></tr>
+  <tr><td>D-001</td><td>Use one generic renderer instead of generating 39 HTML files. The site is static and already has data-driven project cards.</td></tr>
+  <tr><td>D-002</td><td>Keep editing client-side. GitHub Pages cannot write to the repository at runtime, so the editor outputs updated <code>projects-data.js</code>.</td></tr>
+  <tr><td>D-003</td><td>Keep the old bespoke template for custom long-form project pages.</td></tr>
+</table>
+
+<h2>Definition of done</h2>
+<ul>
+  <li>Done · Project cards open rendered detail pages.</li>
+  <li>Done · Detail pages expose the primary external link and related links.</li>
+  <li>Done · Editor can edit fields and produce a replacement <code>projects-data.js</code>.</li>
+  <li>Done · Syntax, data, DOM smoke, and legacy Gulp checks pass.</li>
+</ul>
+</body>
+</html>
